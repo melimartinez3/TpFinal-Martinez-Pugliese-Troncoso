@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TpFinal-Martinez-Pugliese-Troncoso.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="cDespachante.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -34,6 +31,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="cMusimundo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -54,6 +54,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="cMusimundo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cTemplate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cDimensiones.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -145,15 +145,17 @@
     <ClCompile Include="cMicroondas.cpp" />
     <ClCompile Include="cMusimundo.cpp" />
     <ClCompile Include="cTelevisor.cpp" />
-    <ClCompile Include="TpFinal-Martinez-Pugliese-Troncoso.cpp" />
+    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cDespachante.h" />
+    <ClInclude Include="cDimensiones.h" />
     <ClInclude Include="cElectrodomesticos.h" />
     <ClInclude Include="cHeladera.h" />
     <ClInclude Include="cMicroondas.h" />
     <ClInclude Include="cMusimundo.h" />
     <ClInclude Include="cTelevisor.h" />
+    <ClInclude Include="cTemplate.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

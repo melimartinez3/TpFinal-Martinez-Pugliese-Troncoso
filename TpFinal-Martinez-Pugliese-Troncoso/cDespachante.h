@@ -1,5 +1,7 @@
 #pragma once
-#include "cElectrodomesticos.h"
+#include "cMicroondas.h"
+#include"cTelevisor.h"
+#include"cHeladera.h"
 
 using namespace std;
 
@@ -9,10 +11,16 @@ private:
 	string cod_operacion;
 
 public:
+	cDespachante(string _cod_operacion);
 	bool TestearHeladera(cHeladera* heladera);
 	bool TestearTelevisor(cTelevisor* televisor);
 	bool TestearMicroondas(cMicroondas* microondas);
 	void DespacharProducto(cElectrodomesticos* electrodomestico);
+	~cDespachante();
+
+	string get_cos_operacion() {
+		return this->cod_operacion;
+	}
 
 };
 
