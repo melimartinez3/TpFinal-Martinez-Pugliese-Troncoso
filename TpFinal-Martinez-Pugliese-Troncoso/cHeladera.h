@@ -10,13 +10,11 @@ private:
     bool chequeotemperatura;
     int temperatura;// esta es la temp ideal que tendria que tener la heladera
     static int stockactual;
-    time_t horaencufado;
+    time_t horaenchufado;
 public:
-    cHeladera(int temperatura, string _marca, float _peso, float _precio, string _codigo, string _tipo, float ancho, float dalto, float profundidad);
+    cHeladera(int _temperatura, string _marca, float _peso, float _precio, string _codigo, string _tipo, float _ancho, float _alto, float _profundidad);
     bool FuncionamientoCorrecto();
     void EnchufarHeladera();
-    bool VerificacionLuz();
-    bool VerificacionTemperatura();
 
     //declarar static
     ~cHeladera();
@@ -29,8 +27,22 @@ public:
         return this->temperatura;
     }
     time_t get_hora() {
-        return this->horaencufado;
+        return this->horaenchufado;
     }
 
+    void set_chequeotemperatura(bool _chequeotemperatura)
+    {
+        this->chequeotemperatura = _chequeotemperatura;
+    }
+
+    void set_chequeoluzinterior(bool _chequeoluzinterior)
+    {
+        this->chequeoluzinterior = _chequeoluzinterior;
+    }
+
+    void set_horaenchufado(time_t _horaenchufado)
+    {
+        this->horaenchufado = _horaenchufado;
+    }
 };
 

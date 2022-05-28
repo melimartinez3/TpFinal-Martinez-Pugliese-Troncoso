@@ -8,10 +8,10 @@ class cMusimundo
 private:
 	float totalrecaudado;
 	const int stockminimo;
-	cLista<cElectrodomesticos>* electrodomesticos;
+	cLista<cElectrodomesticos>* lista_electrodomesticos;
 
 public:
-	cMusimundo(float _totalrecaudado);
+	cMusimundo(float _totalrecaudado, cLista<cElectrodomesticos>* _lista_electrodomesticos);
 	//declarar const
 	cLista<cElectrodomesticos>* VendidosenelDia();
 	int TotalRecaudadoenelDia();

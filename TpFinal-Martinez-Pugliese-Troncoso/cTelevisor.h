@@ -10,7 +10,7 @@ private:
     static int stockactual;
     bool cable;
 public:
-    cTelevisor(int volumen, bool veoprogramacion, string _marca, float _peso, float _precio, string _codigo, string _tipo, float ancho, float dalto, float profundidad);
+    cTelevisor(int _volumen, bool _veoprogramacion, string _marca, float _peso, float _precio, string _codigo, string _tipo, float ancho, float dalto, float profundidad);
     // declarar los static
     bool FuncionamientoCorrecto();
     void Encender();

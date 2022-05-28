@@ -10,7 +10,7 @@ class cElectrodomesticos
 {
 protected:
 	const string marca;
-	cDimensiones dimensiones;
+	cDimensiones* dimensiones;
 	float peso;
 	float precio;
 	const string codigo;
@@ -19,7 +19,7 @@ protected:
 
 public:
 
-	cElectrodomesticos(string _marca, float _peso, float _precio, string _codigo, string _tipo, float ancho, float alto, float profundidad);// declarar los const
+	cElectrodomesticos(string _marca, float _peso, float _precio, string _codigo, string _tipo, float _ancho, float _alto, float _profundidad);// declarar los const
 	cLista<cElectrodomesticos>*BuscarPorCodigo(string _codigo);
 	cLista<cElectrodomesticos>*BuscarPorMarca(string _marca);
 	cLista<cElectrodomesticos>*BuscarporTipoyNombre(string _tipo, string _nombre);
