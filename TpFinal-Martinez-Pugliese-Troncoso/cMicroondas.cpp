@@ -9,11 +9,41 @@ cMicroondas::cMicroondas(int _potencia, string _marca, float _peso, float _preci
 
 int cMicroondas::stockactual = 6;
 
-bool cMicroondas::FuncionamientoCorrecto()
-{
+void cMicroondas::AbrirPuerta() {
 
 }
 
+void cMicroondas::PotenciaMaxima() {
+	
+}
+
+void cMicroondas::ChequeoEncendidoPor1Min() {
+
+}
+
+
+bool cMicroondas::FuncionamientoCorrecto()
+{
+	return true;
+}
+string cMicroondas::to_string() {
+
+	string precio_string,dato, potencia_string;
+	stringstream sstream;
+
+	sstream << precio_string;
+	precio_string = sstream.str();
+
+	sstream << potencia_string;
+	potencia_string = sstream.str();
+
+	dato = "\nMicroondas: Marca: " + marca + " Precio: " + precio_string + " Codigo: " + codigo + " Tipo: " + tipo + " Potencia: " + potencia_string;
+	return dato;
+}
+void cMicroondas::imprimir() {
+	string dato = to_string();
+	cout << dato;
+}
 cMicroondas::~cMicroondas()
 {
 

@@ -11,12 +11,13 @@ private:
     bool cable;
 public:
     cTelevisor(int _volumen, bool _veoprogramacion, string _marca, float _peso, float _precio, string _codigo, string _tipo, float ancho, float dalto, float profundidad);
-    // declarar los static
+
     bool FuncionamientoCorrecto();
     void Encender();
-    void Apagar();
     void VerificarVolumen();
     void ConectarCable();
+    string to_string();
+    void imprimir();
     ~cTelevisor();
     // declaracion de gets
     bool get_veoprogramacion() {

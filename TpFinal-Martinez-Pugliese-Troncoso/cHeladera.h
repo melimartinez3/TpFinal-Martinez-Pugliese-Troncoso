@@ -15,7 +15,8 @@ public:
     cHeladera(int _temperatura, string _marca, float _peso, float _precio, string _codigo, string _tipo, float _ancho, float _alto, float _profundidad);
     bool FuncionamientoCorrecto();
     void EnchufarHeladera();
-
+    string to_string();
+    void imprimir();
     //declarar static
     ~cHeladera();
 

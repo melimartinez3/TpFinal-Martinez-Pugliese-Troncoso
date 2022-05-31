@@ -10,6 +10,22 @@ cElectrodomesticos::cElectrodomesticos(string _marca, float _peso, float _precio
 
 int cElectrodomesticos::vendidos = 0;
 
+cLista<cElectrodomesticos>* cElectrodomesticos::BuscarPorCodigo(string _codigo) {
+	cLista<cElectrodomesticos>* aux = NULL;
+	return aux;
+}
+cLista<cElectrodomesticos>* cElectrodomesticos::BuscarPorMarca(string _marca) {
+	cLista<cElectrodomesticos>* aux = NULL;
+	return aux;
+}
+cLista<cElectrodomesticos>* cElectrodomesticos::BuscarporTipoyNombre(string _tipo, string _nombre) {
+	cLista<cElectrodomesticos>* aux = NULL;
+	return aux;
+}
+void cElectrodomesticos::RemitirProducto(cDespachante* despachante) {
+
+}
+
 cElectrodomesticos::~cElectrodomesticos()
 {
 	if (dimensiones != NULL)

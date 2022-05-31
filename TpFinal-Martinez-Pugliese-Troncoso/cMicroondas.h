@@ -16,9 +16,10 @@ public:
     cMicroondas(int _potencia, string _marca, float _peso, float _precio, string _codigo, string _tipo, float _ancho, float _alto, float _profundidad);
     bool FuncionamientoCorrecto();
     void AbrirPuerta();
-    void CerrarPuerta();
     void PotenciaMaxima();
     void ChequeoEncendidoPor1Min();
+    string to_string();
+    void imprimir();
     ~cMicroondas();
     
     bool ge_tluz() {

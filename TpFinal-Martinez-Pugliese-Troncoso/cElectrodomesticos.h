@@ -1,8 +1,14 @@
 #pragma once
 #include "cTemplate.h"
 #include "cDimensiones.h"
-#include "ctime"
+#include <ctime>
+#include <sstream>
+
+//#pragma warning(disable:4996)
+//#define _CRT_SECURE_NO_WARNINGS
+
 class cDespachante;
+
 
 using namespace std;
 
@@ -24,7 +30,11 @@ public:
 	cLista<cElectrodomesticos>*BuscarPorMarca(string _marca);
 	cLista<cElectrodomesticos>*BuscarporTipoyNombre(string _tipo, string _nombre);
 	void RemitirProducto(cDespachante* despachante);
+
 	virtual bool FuncionamientoCorrecto()=0;
+	virtual string to_string()=0;
+	virtual void imprimir()=0;
+
 	~cElectrodomesticos();
 
 	bool get_peso() {

@@ -16,6 +16,8 @@ public:
 	bool TestearTelevisor(cTelevisor* televisor);
 	bool TestearMicroondas(cMicroondas* microondas);
 	void DespacharProducto(cElectrodomesticos* electrodomestico);
+	string to_string();
+	void imprimir();
 	~cDespachante();
 
 	string get_cos_operacion() {

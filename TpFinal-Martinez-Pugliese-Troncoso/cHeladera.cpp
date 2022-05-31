@@ -17,7 +17,7 @@ void cHeladera::EnchufarHeladera()
 
 	time_t hora_t;
 	hora_t = time(NULL);
-	ctime(&hora_t);
+	(void)ctime(&hora_t);
 
 	this->set_horaenchufado(hora_t);
 
@@ -36,9 +36,9 @@ bool cHeladera::FuncionamientoCorrecto()
 {
 	time_t hora_t;
 	hora_t = time(NULL);
-	ctime(&hora_t);
+	(void)ctime(&hora_t);
 
-	if (difftime(this->horaenchufado, hora_t) < (10 * 60) && this->chequeoluzinterior == true && this->chequeotemperatura == true)
+	if (difftime(this->horaenchufado, hora_t) < 600 && this->chequeoluzinterior == true && this->chequeotemperatura == true) //la  diferencia entre la hora de enchufado y actual debe ser menor a 10 minutos-> 10*60=600
 		return true;
 
 	else 
@@ -46,6 +46,24 @@ bool cHeladera::FuncionamientoCorrecto()
 
 }
 
+string cHeladera::to_string() {
+
+	string precio_string, dato,temp_string;
+	stringstream sstream;
+
+	sstream << precio_string;
+	precio_string = sstream.str();
+
+	sstream << temp_string;
+	temp_string = sstream.str();
+
+	dato = "\nHeladera: Marca: " + marca + " Precio: " + precio_string + " Codigo: " + codigo + " Tipo: " + tipo + " Temperatura: " + temp_string;
+	return dato;
+}
+void cHeladera::imprimir() {
+	string dato = to_string();
+	cout << dato;
+}
 
 cHeladera::~cHeladera()
 {
