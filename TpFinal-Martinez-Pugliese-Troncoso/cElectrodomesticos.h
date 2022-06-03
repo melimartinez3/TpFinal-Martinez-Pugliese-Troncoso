@@ -15,6 +15,7 @@ using namespace std;
 class cElectrodomesticos
 {
 protected:
+	const int voltaje;// volatje es 220 
 	const string marca;
 	cDimensiones* dimensiones;
 	float peso;
@@ -31,7 +32,7 @@ public:
 	cLista<cElectrodomesticos>*BuscarporTipoyNombre(string _tipo, string _nombre);
 	void RemitirProducto(cDespachante* despachante);
 
-	virtual bool FuncionamientoCorrecto()=0;
+	virtual bool FuncionamientoInorrecto()=0;
 	virtual string to_string()=0;
 	virtual void imprimir()=0;
 

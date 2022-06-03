@@ -4,45 +4,63 @@ cHeladera::cHeladera(int _temperatura, string _marca, float _peso, float _precio
 {
 	this->temperatura = _temperatura;
 	this->horaenchufado = 0;
-	this->chequeoluzinterior = true;
-	this->chequeotemperatura = true;
 }
 
 int cHeladera::stockactual = 6;
 
 void cHeladera::EnchufarHeladera()
 {
-	int random_luz = rand() % 1; //si sale 0 funciona, si sale 1 no funciona
-	int random_temperatura = (rand() % 20) < 4;
-
 	time_t hora_t;
 	hora_t = time(NULL);
 	(void)ctime(&hora_t);
 
 	this->set_horaenchufado(hora_t);
-
-	if (random_luz == 0)
-		this->set_chequeoluzinterior(true);
-	else
-		this->set_chequeoluzinterior(false);
-
-	if (random_temperatura < 4)
-		this->set_chequeotemperatura(false);
-	else
-		this->set_chequeotemperatura(true);
 }
 
-bool cHeladera::FuncionamientoCorrecto()
+bool cHeladera::FuncionamientoInorrecto()
 {
+	int random_error = (rand() % 20) < 4;
+	int random_caracteristiafallada = rand() % 5;// segun su valor en el enum es la caracteristca fallada
+	EnchufarHeladera();
+	
 	time_t hora_t;
 	hora_t = time(NULL);
 	(void)ctime(&hora_t);
-
-	if (difftime(this->horaenchufado, hora_t) < 600 && this->chequeoluzinterior == true && this->chequeotemperatura == true) //la  diferencia entre la hora de enchufado y actual debe ser menor a 10 minutos-> 10*60=600
-		return true;
-
-	else 
+	
+	try {
+		if (difftime(this->horaenchufado, hora_t) < 600)//la  diferencia entre la hora de enchufado y actual es menor a 10 minutos-> 10*60=600
+			throw;
+	}
+	catch (int& e) {
+		cerr << "No han pasado los 10 minutos necesarios de testeo"<<e <<endl;
 		return false;
+	}
+
+	switch (random_caracteristiafallada) {
+	case luzinterior: { fallas[luzinterior] = true;
+			break; }
+	case termostato: { fallas[termostato] = true;
+		break;
+	}
+	case obstruccionhielo: {fallas[obstruccionhielo] = true;
+		break;
+	}
+	case sellomagnetico: {fallas[sellomagnetico] = true;
+		break;
+	}
+	case saltodevoltaje: {fallas[saltodevoltaje] = true;
+		break;
+	}
+	case perdidarefrigerante: {fallas[perdidarefrigerante] = true;
+		break; }
+	}
+	
+	for (int i = 0; i < 7; i++) {
+		if (fallas[i] == true) {
+			return true;
+		}
+	}
+	return false;
 
 }
 

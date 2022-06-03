@@ -18,8 +18,10 @@ int main() {
 		bool ok=musimundo->VerificarCostoListaCompleta();
 		if (ok)
 			musimundo->AgregarListaAlStock();
-		else
+		else {
 			delete listaaux;
+			listaaux = NULL;
+		}
 	}
 
 	

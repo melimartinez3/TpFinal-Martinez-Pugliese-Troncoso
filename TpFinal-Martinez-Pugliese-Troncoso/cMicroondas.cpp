@@ -22,7 +22,7 @@ void cMicroondas::ChequeoEncendidoPor1Min() {
 }
 
 
-bool cMicroondas::FuncionamientoCorrecto()
+bool cMicroondas::FuncionamientoInorrecto()
 {
 	return true;
 }

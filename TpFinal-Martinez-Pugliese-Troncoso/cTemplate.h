@@ -172,7 +172,7 @@ ostream& operator<< <>(ostream& out, const cLista<T>& List) {
 
 	for (int i = 0; i < List.cantactual; i++)
 	{
-		//out << List.lista[i]->to_string() << endl;
+		out << List.lista[i]->to_string() << endl;
 	}
 
 	return out;

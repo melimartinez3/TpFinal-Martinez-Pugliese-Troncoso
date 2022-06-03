@@ -14,7 +14,7 @@ private:
     time_t horaencendidio;
 public:
     cMicroondas(int _potencia, string _marca, float _peso, float _precio, string _codigo, string _tipo, float _ancho, float _alto, float _profundidad);
-    bool FuncionamientoCorrecto();
+    bool FuncionamientoInorrecto();
     void AbrirPuerta();
     void PotenciaMaxima();
     void ChequeoEncendidoPor1Min();
