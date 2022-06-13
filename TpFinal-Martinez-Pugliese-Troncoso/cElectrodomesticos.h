@@ -3,11 +3,11 @@
 #include "cDimensiones.h"
 #include <ctime>
 #include <sstream>
-
+class cDespachante;
 //#pragma warning(disable:4996)
 //#define _CRT_SECURE_NO_WARNINGS
 
-class cDespachante;
+
 
 
 using namespace std;
@@ -27,12 +27,12 @@ protected:
 public:
 
 	cElectrodomesticos(string _marca, float _peso, float _precio, string _codigo, string _tipo, float _ancho, float _alto, float _profundidad);// declarar los const
-	cLista<cElectrodomesticos>*BuscarPorCodigo(string _codigo);
-	cLista<cElectrodomesticos>*BuscarPorMarca(string _marca);
-	cLista<cElectrodomesticos>*BuscarporTipoyNombre(string _tipo, string _nombre);
-	void RemitirProducto(cDespachante* despachante);
+	cElectrodomesticos* BuscarPorCodigo(string _codigo, cMusimundo* musimundo);
+	cLista<cElectrodomesticos>* BuscarPorMarca(string _marca, cMusimundo* musimundo);
+	cLista<cElectrodomesticos>* BuscarporTipoyNombre(string _tipo, string _nombre, cMusimundo* musimundo);
+	void RemitirProducto(cDespachante* despachante, cMusimundo* musimundo);
 
-	virtual bool FuncionamientoInorrecto()=0;
+	virtual bool FuncionamientoIncorrecto()=0;
 	virtual string to_string()=0;
 	virtual void imprimir()=0;
 

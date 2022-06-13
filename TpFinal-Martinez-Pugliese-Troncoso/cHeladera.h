@@ -12,9 +12,10 @@ private:
     static int stockactual;
     bool fallas[6] = { false, false, false, false, false,false };
     time_t horaenchufado;
+
 public:
     cHeladera(int _temperatura, string _marca, float _peso, float _precio, string _codigo, string _tipo, float _ancho, float _alto, float _profundidad);
-    bool FuncionamientoInorrecto();
+    bool FuncionamientoIncorrecto();
     void EnchufarHeladera();
     string to_string();
     void imprimir();

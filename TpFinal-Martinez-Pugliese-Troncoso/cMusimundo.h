@@ -6,13 +6,16 @@
 class cMusimundo
 {
 private:
+	static int vendidos_dia;
 	float totalrecaudado;
 	const int stockminimo;
 	cLista<cElectrodomesticos>* lista_electrodomesticos;
 
 public:
+	friend class cDespachante;
+	friend class cElectrodomesticos;
 	cMusimundo();
-	cLista<cElectrodomesticos>* VendidosenelDia();
+	cLista<cElectrodomesticos>* VendidosenelDia(int dia, int mes, int anio);
 	
 	cLista<cElectrodomesticos>* VerificarStockMinimo();// devolvemos en una lista todos los electrodomesticos que tienen un stock menor a 5
 	void CompletarStock(cLista<cElectrodomesticos>* listaux);// llamamos a la funcion de verificar el stock minimo y a los elementos que tengan uno menor a 5 las completamos

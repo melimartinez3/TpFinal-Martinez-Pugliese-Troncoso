@@ -3,56 +3,60 @@
 cTelevisor::cTelevisor(int _volumen, string _marca, float _peso, float _precio, string _codigo, string _tipo, float ancho, float dalto, float profundidad) :cElectrodomesticos(_marca, _peso, _precio, _codigo, _tipo, ancho, dalto, profundidad)
 {
 	this->volumen = _volumen;
+	this->canal = 0;
+
 }
 
 int cTelevisor::stockactual = 6;
-int cTelevisor::canal = 0;
+
+bool cTelevisor::Falla_EncenderTelevisor(){
+
+	int random_error = (rand() % 10) < 1;
+	if (random_error < 1)
+		return true;
+	else
+		return false;
+
+}
 
 bool cTelevisor::FuncionamientoIncorrecto() {
-	for (int i = 0; i < 8; i++) {
-		if (fallas[i] == true)
-			return true;// no funciona correctamente
-		else
-			return false; // funciona como corresponde
-	}
-}
-void cTelevisor::EnchufarTelevisor() {
-	// consideramos que el televisor siempre va a encender
-	int randomfallado = (rand() % 10) < 1;
-	int random_carasteristicafallada = rand() % 6;// determinamos cada valor de falla segun el enum
-	
-	// switch para determinar que caracteristica fallo y modifarlo en el array
-	switch (random_carasteristicafallada) {
-	case smart: {fallas[smart] = true;
-		           break;
-	            }
-	case sonido: {fallas[sonido] = true;
-		break;
-	}
-	case cable: {fallas[cable] = true;
-		break;
-	}
-	case control: {fallas[control] = true;
-		break;
-	}
-	case display: {fallas[display] = true;
-		break;
-	}
-	case cambiocanal: {fallas[cambiocanal] = true;
-		break;
-	}
-	case saltovoltaje: {fallas[saltovoltaje] = true;
-		break;
-	}
 
-	}
+	int random_caracteristiafallada = rand() % 6;// segun su valor en el enum es la caracteristca fallada
 
+	if (Falla_EncenderTelevisor())
+	{
+		switch (random_caracteristiafallada) {
+
+		case smart: { fallas[smart] = true;
+			return true; }
+		case sonido: { fallas[sonido] = true;
+			return true; }
+		case cable: {fallas[cable] = true;
+			return true; }
+		case control: {fallas[control] = true;
+			return true; }
+		case display: {fallas[display] = true;
+			return true; }
+		case cambiocanal: {fallas[cambiocanal] = true;
+			return true; }
+		case saltovoltaje: {
+			fallas[saltovoltaje] = true;
+			return true;
+		}
+
+		}
+	}
+	else return false;
 
 }
 
 string cTelevisor::to_string() {
 	string dato;
-	string volumen_string, stockactual_string, precio_string;
+	string volumen_string, stockactual_string, cablee, precio_string;
+	if (cable == true)
+		cablee = "Si";
+	else
+		cablee = "No";
 
 	stringstream sstream;
 	sstream << volumen;
@@ -63,13 +67,15 @@ string cTelevisor::to_string() {
 
 	sstream << precio_string;
 	precio_string = sstream.str();
-	dato = "\nTelevisor: Marca: "+ marca+ " Precio: "+ precio_string+ " Codigo: "+ codigo+ " Tipo: "+ tipo+ " Volumen : " + volumen_string + " Stock actual : " + stockactual_string;
+	dato = "\nTelevisor: Marca: "+ marca+ " Precio: "+ precio_string+ " Codigo: "+ codigo+ " Tipo: "+ tipo+ " Volumen : " + volumen_string + " Stock actual : " + stockactual_string + " Clabe conectado : " + cablee;
 	return dato;
 }
+
 void cTelevisor::imprimir() {
 	string dato = to_string();
 	cout << dato;
 }
+
 cTelevisor::~cTelevisor()
 {
 
