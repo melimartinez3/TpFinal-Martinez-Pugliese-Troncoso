@@ -24,6 +24,7 @@ private:
 
 public:
     cMicroondas(int _potencia, string _marca, float _peso, float _precio, string _codigo, string _tipo, float _ancho, float _alto, float _profundidad);
+    cMicroondas(const cMicroondas& heladera);
     bool FuncionamientoIncorrecto();
     void Modificar_fallas_calentamientos();
     void EnchufarMicroondas();
@@ -60,5 +61,16 @@ public:
     int get_potenciamax()const {
         return this->potencia_max;
     }
+
+    static void set_stock(int stock)
+    {
+        stockactual = stock;
+    }
+
+    static int get_stock()
+    {
+        return stockactual;
+    }
+
 };
 

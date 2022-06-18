@@ -12,15 +12,25 @@ bool cDespachante::TestearElectrodomestrico(cElectrodomesticos* electrodomestico
 }
 
 
-
  bool cDespachante::DespacharProducto(cElectrodomesticos* electrodomestico,cMusimundo*musimundo) {
 	bool chequeo = TestearElectrodomestrico(electrodomestico);
+
+	time_t rawtime;
+	struct tm timeinfo;
+	time(&rawtime);
+	localtime_s(&timeinfo, &rawtime);
+
+	int dia_hoy = timeinfo.tm_mday;
+	int mes_hoy = timeinfo.tm_mon;
+	int anio_hoy = timeinfo.tm_year - 100;
 	
 	if (chequeo)
 		return false;//no se puedo despachar el producto porque esta fallado
 	else
 	{
+		musimundo->VendidosenelDia(dia_hoy, mes_hoy, anio_hoy, electrodomestico);
 		musimundo->lista_electrodomesticos->operator-(electrodomestico);
+
 		return true;//el producto funciona bien y se eliminó de la lista porque se despachó
 	}
 }

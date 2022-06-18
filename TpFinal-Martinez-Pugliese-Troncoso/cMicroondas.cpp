@@ -8,6 +8,14 @@ cMicroondas::cMicroondas(int _potencia, string _marca, float _peso, float _preci
 	this->modocalentamiento = true;
 }
 
+cMicroondas::cMicroondas(const cMicroondas& microondas) :potencia_max(1200),cElectrodomesticos(microondas.marca, microondas.peso, microondas.precio, microondas.codigo, microondas.tipo, microondas.dimensiones->get_ancho(), microondas.dimensiones->get_alto(), microondas.dimensiones->get_profundidad())
+{
+	this->potencia = microondas.potencia;
+	this->horaencendido = microondas.horaencendido;
+	this->luz = microondas.luz;
+	this->modocalentamiento = microondas.modocalentamiento;
+}
+
 int cMicroondas::stockactual = 6;
 
 void cMicroondas::EnchufarMicroondas()

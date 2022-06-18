@@ -7,6 +7,13 @@ cTelevisor::cTelevisor(int _volumen, string _marca, float _peso, float _precio, 
 
 }
 
+cTelevisor::cTelevisor(const cTelevisor& televisor) :cElectrodomesticos(televisor.marca, televisor.peso, televisor.precio, televisor.codigo, televisor.tipo, televisor.dimensiones->get_ancho(), televisor.dimensiones->get_alto(), televisor.dimensiones->get_profundidad())
+{
+	this->volumen = televisor.volumen;
+	this->canal = televisor.canal;
+	
+}
+
 int cTelevisor::stockactual = 6;
 
 bool cTelevisor::Falla_EncenderTelevisor(){

@@ -8,6 +8,12 @@ cHeladera::cHeladera(int _temperatura, string _marca, float _peso, float _precio
 
 int cHeladera::stockactual = 6;
 
+cHeladera:: cHeladera(const cHeladera& heladera):cElectrodomesticos(heladera.marca, heladera.peso, heladera.precio, heladera.codigo, heladera.tipo, heladera.dimensiones->get_ancho(), heladera.dimensiones->get_alto(), heladera.dimensiones->get_profundidad())
+{
+	this->temperatura = heladera.temperatura;
+	this->horaenchufado = heladera.horaenchufado;
+}
+
 void cHeladera::EnchufarHeladera()
 {
 	time_t hora_t;

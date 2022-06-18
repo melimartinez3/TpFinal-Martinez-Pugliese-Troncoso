@@ -3,7 +3,7 @@
 #include "cDimensiones.h"
 #include <ctime>
 #include <sstream>
-class cDespachante;
+class cMusimundo;
 //#pragma warning(disable:4996)
 //#define _CRT_SECURE_NO_WARNINGS
 

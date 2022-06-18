@@ -15,7 +15,7 @@ int main() {
 	cLista<cElectrodomesticos>* listaaux = musimundo->VerificarStockMinimo();
 	if (listaaux != NULL)
 	{
-		musimundo->CompletarStock(listaaux);
+		musimundo->CompletarStock();
 		bool ok=musimundo->VerificarCostoListaCompleta();
 		if (ok)
 			musimundo->AgregarListaAlStock();

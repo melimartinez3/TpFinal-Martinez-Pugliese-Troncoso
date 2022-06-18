@@ -15,6 +15,7 @@ private:
 
 public:
     cHeladera(int _temperatura, string _marca, float _peso, float _precio, string _codigo, string _tipo, float _ancho, float _alto, float _profundidad);
+    cHeladera(const cHeladera& heladera);
     bool FuncionamientoIncorrecto();
     void EnchufarHeladera();
     string to_string();
@@ -34,5 +35,16 @@ public:
     {
         this->horaenchufado = _horaenchufado;
     }
+
+    static void set_stock(int stock)
+    {
+        stockactual = stock;
+    }
+
+    static int get_stock()
+    {
+        return stockactual;
+    }
+
 };
 

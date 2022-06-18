@@ -2,6 +2,7 @@
 #include<stdio.h>
 #include<string>
 #include <stdlib.h>
+#include <iostream>
 
 using namespace std;
 
@@ -14,13 +15,15 @@ private:
 
 public:
 	friend class cElectrodomesticos;
+	friend class cMusimundo;
+
 	cLista(int _tamtotal);
 	void operator+(T* nuevo);
 	/*int	Buscar(string busqueda);*/
 	T* operator-(T* aeliminar);
 	cLista<T>* Filtrar(string parametro);
 	friend ostream& operator<< <>(ostream& out, const cLista<T>&);
-	T* operator[](string busqueda);
+	T* operator[](int pos);
 
 	void set_cantactual(int cantactual) {
 		this->cantactual = cantactual;
@@ -90,9 +93,13 @@ void cLista<T>::operator+(T* nuevo) {
 /// <param name="busqueda"></param>
 /// <returns></returns>
 template <class T>
-T* cLista<T>::operator[](string busqueda)
+T* cLista<T>::operator[](int pos)
 {
-	return Buscar(busqueda);
+	if (pos < cantactual)
+		return lista[pos];
+
+	else
+		return NULL;
 }
 
 /// <summary>

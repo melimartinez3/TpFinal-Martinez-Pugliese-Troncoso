@@ -14,6 +14,7 @@ private:
     static int stockactual;
 public:
     cTelevisor(int _volumen, string _marca, float _peso, float _precio, string _codigo, string _tipo, float ancho, float dalto, float profundidad);
+    cTelevisor(const cTelevisor& televisar);
     bool FuncionamientoIncorrecto();
     bool Falla_EncenderTelevisor();
     string to_string();
@@ -24,7 +25,16 @@ public:
     int get_volumen() {
         return this->volumen;
     }
-
    
+    static void set_stock(int stock)
+    {
+        stockactual = stock;
+    }
+
+    static int get_stock()
+    {
+        return stockactual;
+    }
+
 };
 
