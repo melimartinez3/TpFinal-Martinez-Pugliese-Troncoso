@@ -2,6 +2,7 @@
 #include "cMicroondas.h"
 #include  "cTelevisor.h"
 #include "cHeladera.h"
+#include "cVendedor.h"
 
 #define TMAX 50
 
@@ -19,7 +20,7 @@ public:
 	friend class cElectrodomesticos;
 	cMusimundo();
 
-	void VendidosenelDia(int dia, int mes, int anio, cElectrodomesticos* vendido);
+	void VendidosenelDia(int dia, int mes, int anio, cElectrodomesticos* vendido, cVendedor* vendedor);
 	cLista<cElectrodomesticos>* VerificarStockMinimo();// devolvemos en una lista todos los electrodomesticos que tienen un stock menor a 5
 	cLista<cElectrodomesticos>* CompletarStock();// llamamos a la funcion de verificar el stock minimo y a los elementos que tengan uno menor a 5 las completamos
 	cLista<cElectrodomesticos>* VerificarCostoListaCompleta();// devuelve true si vale mas de 20000

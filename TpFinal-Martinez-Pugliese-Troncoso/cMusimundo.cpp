@@ -41,7 +41,7 @@ cElectrodomesticos* cMusimundo::ProductoAVender(cElectrodomesticos* electrodomes
 	return aux_elect;
 }
 
-void cMusimundo::VendidosenelDia(int dia, int mes, int anio, cElectrodomesticos* vendido) {
+void cMusimundo::VendidosenelDia(int dia, int mes, int anio, cElectrodomesticos* vendido, cVendedor* vendedor) {
 	
 	time_t rawtime;
 	struct tm timeinfo;
@@ -57,13 +57,17 @@ void cMusimundo::VendidosenelDia(int dia, int mes, int anio, cElectrodomesticos*
 	if (dia_hoy == dia && mes_hoy == mes && anio == anio_hoy) {
 		vendidos_dia++;// es el dia de hoy, le sumamos uno
 		lista_vendidos->operator+(electrodomestico);
+		vendedor->AgregarElectrodomesticoVendido(electrodomestico);
+
 	}
 	else //PREGUNTAR SI LOS STATICS VAN CON SETTERS O SEPUEDEN HACER ASI
 	{ //comenzo un nuevo dia
 		vendidos_dia = 0; //las ventas vuelven a 0
 		vendidos_dia++;//le sumamos uno
+		vendedor->EliminarYCrearNuevaLista();
 		lista_vendidos = new cLista<cElectrodomesticos>(TMAX);
 		lista_vendidos->operator+(electrodomestico);
+		vendedor->AgregarElectrodomesticoVendido(electrodomestico);
 	}
 }
 

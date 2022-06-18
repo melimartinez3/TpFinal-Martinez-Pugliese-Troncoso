@@ -16,6 +16,8 @@ private:
 public:
 	friend class cElectrodomesticos;
 	friend class cMusimundo;
+	friend class cCliente;
+	friend class cVendedor;
 
 	cLista(int _tamtotal);
 	void operator+(T* nuevo);
@@ -175,11 +177,11 @@ cLista<T>* cLista<T>::Filtrar(string parametro)
 /// <param name="clase"></param>
 /// <returns></returns>
 template <class T>
-ostream& operator<< <>(ostream& out, const cLista<T>& List) {
+ostream& operator<< <>(ostream& out, const cLista<T>& Lista) {
 
-	for (int i = 0; i < List.cantactual; i++)
+	for (int i = 0; i < Lista.cantactual; i++)
 	{
-		out << List.lista[i]->to_string() << endl;
+		out << Lista.lista[i]->to_string() << endl;
 	}
 
 	return out;

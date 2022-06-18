@@ -1,6 +1,6 @@
 #include "cDespachante.h"
 
-cDespachante::cDespachante(string _cod_operacion)
+cDespachante::cDespachante(string _cod_operacion,string nombre, string _dni, string fechanac, string cod, float _sueldo, char _turno):cEmpleado(nombre, _dni, fechanac, cod,_sueldo, _turno)
 {
 	this->cod_operacion = _cod_operacion;
 }
