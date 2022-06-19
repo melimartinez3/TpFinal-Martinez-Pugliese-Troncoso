@@ -1,12 +1,15 @@
 #include "cMusimundo.h"
-
+#include "cVendedor.h"
+#include "cDespachante.h"
 cMusimundo::cMusimundo() :stockminimo(5)
 {
 	this->totalrecaudado = 0;
 	lista_electrodomesticos = new cLista<cElectrodomesticos>(TMAX);
 	lista_vendidos = new cLista<cElectrodomesticos>(TMAX);
 }
+
 int cMusimundo::vendidos_dia = 0;
+float cMusimundo::totalrecaudado = 0;
 
 cElectrodomesticos* cMusimundo::ProductoAVender(cElectrodomesticos* electrodomestico)
 {
@@ -21,23 +24,27 @@ cElectrodomesticos* cMusimundo::ProductoAVender(cElectrodomesticos* electrodomes
 		aux_elect = new cHeladera(*heladera);
 		int n = heladera->get_stock();
 		heladera->set_stock(n--);
-	}
-
-	if (microondas != NULL)
+		
+	}else if (microondas != NULL)
 	{
 		aux_elect = new cMicroondas(*microondas);
 		int n = microondas->get_stock();
 		microondas->set_stock(n--);
 
 	}
-
-	if (televisor != NULL)
+	else if (televisor != NULL)
 	{
 		aux_elect = new cTelevisor(*televisor);
 		int n = televisor->get_stock();
 		televisor->set_stock(n--);
 	}
+	else
+	{
+		throw new exception(" No se encontro en articulo buscado ");
+		return NULL; //PREGUNTAR SI ES NECESARIO
+	}
 
+	totalrecaudado = totalrecaudado + aux_elect->get_precio();
 	return aux_elect;
 }
 
@@ -62,7 +69,11 @@ void cMusimundo::VendidosenelDia(int dia, int mes, int anio, cElectrodomesticos*
 	}
 	else //PREGUNTAR SI LOS STATICS VAN CON SETTERS O SEPUEDEN HACER ASI
 	{ //comenzo un nuevo dia
+		cout << "\nOperaciones del dia de ayer: ";
+		imprimir(); //se imprime el total recaudado y lo vendido en el dia anterior, antes de eliminarlo
+		totalrecaudado = 0;
 		vendidos_dia = 0; //las ventas vuelven a 0
+		totalrecaudado = 0;
 		vendidos_dia++;//le sumamos uno
 		vendedor->EliminarYCrearNuevaLista();
 		lista_vendidos = new cLista<cElectrodomesticos>(TMAX);
@@ -214,7 +225,7 @@ cLista<cElectrodomesticos>* cMusimundo::CompletarStock() {
 
 		if (heladera != NULL)
 		{
-			if (cont_h = 0)
+			if (cont_h == 0)
 			{
 				int cont = heladera->get_stock();
 				int cant_heladeras_crear = 5 - cont;
@@ -227,7 +238,7 @@ cLista<cElectrodomesticos>* cMusimundo::CompletarStock() {
 
 		if (microondas != NULL)
 		{
-			if (cont_m = 0)
+			if (cont_m == 0)
 			{
 				int cont = microondas->get_stock();
 				int cant_microondas_crear = 5 - cont;
@@ -240,7 +251,7 @@ cLista<cElectrodomesticos>* cMusimundo::CompletarStock() {
 
 		if (televisor != NULL)
 		{
-			if (cont_t = 0)
+			if (cont_t == 0)
 			{
 				int cont = televisor->get_stock();
 				int cant_televisores_crear = 5 - cont;
@@ -304,7 +315,72 @@ void cMusimundo::AgregarListaAlStock() {
 	return;
 
 }
+cElectrodomesticos& operator++(cElectrodomesticos& electro) {
+	float precio_anterior = electro.get_precio();
+	electro.set_precio(1.25 * precio_anterior);
+	return electro;
+}
+cElectrodomesticos& operator--(cElectrodomesticos& electro) {
+	float precio_anterior = electro.get_precio();
+	electro.set_precio(0.8 * precio_anterior);
+	return electro;
+}
 
+string cMusimundo::tostring() {
+	
+	string recaudado = to_string(totalrecaudado);
+	string dato = "Total Recaudado En el Dia:  " + recaudado;
+	return dato;
+}
+
+void cMusimundo::imprimir() {
+	string dato = tostring();
+	cout << dato;
+	int n = lista_vendidos->get_cant_actual();
+
+	cout << "\nLos electrodomesticos vendidos en el dia fueron: ";
+	cout << lista_vendidos->lista;
+
+}
+void cMusimundo::Determinar_Descuento() {
+	time_t rawtime;
+	struct tm timeinfo;
+	time(&rawtime);
+	localtime_s(&timeinfo, &rawtime);
+
+	int dia_hoy = timeinfo.tm_mday;
+	if (dia_hoy == 31) {
+		Dia_De_Descuentos();
+	
+	}
+	
+
+}
+void cMusimundo::Dia_De_Descuentos() {
+
+	int n = lista_electrodomesticos->get_cant_actual();
+
+	for (int i = 0; i < n; i++) {
+		operator--(*(lista_electrodomesticos->lista[i]));
+	}
+
+}
+void cMusimundo::Termino_Dia_De_Descuentos() {
+	int n = lista_electrodomesticos->get_cant_actual();
+
+	for (int i = 0; i < n; i++) {
+		operator++(*(lista_electrodomesticos->lista[i]));
+	}
+}
+void cMusimundo::Con_o_Sin_Descuento() {
+	time_t rawtime;
+	struct tm timeinfo;
+	time(&rawtime);
+	localtime_s(&timeinfo, &rawtime);
+	int dia_hoy = timeinfo.tm_mday;
+	if (dia_hoy == 31)
+		cout << "\nEsta comprando con descuento! Enhorabuena! ";
+}
 cMusimundo::~cMusimundo()
 {
 	if (lista_electrodomesticos != NULL)

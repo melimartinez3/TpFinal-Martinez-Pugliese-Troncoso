@@ -48,6 +48,9 @@
     <ClCompile Include="cVendedor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="cDimensiones.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cDespachante.h">
@@ -71,9 +74,6 @@
     <ClInclude Include="cTemplate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="cDimensiones.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="cPersona.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -84,6 +84,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="cVendedor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cDimensiones.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

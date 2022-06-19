@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="cCliente.cpp" />
     <ClCompile Include="cDespachante.cpp" />
+    <ClCompile Include="cDimensiones.cpp" />
     <ClCompile Include="cElectrodomesticos.cpp" />
     <ClCompile Include="cEmpleado.cpp" />
     <ClCompile Include="cHeladera.cpp" />

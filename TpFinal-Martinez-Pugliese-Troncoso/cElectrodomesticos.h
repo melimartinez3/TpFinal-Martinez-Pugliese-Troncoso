@@ -6,8 +6,8 @@
 class cMusimundo;
 //#pragma warning(disable:4996)
 //#define _CRT_SECURE_NO_WARNINGS
-
-
+class cDespachante;
+class cVendedor;
 
 
 using namespace std;
@@ -30,14 +30,16 @@ public:
 	cElectrodomesticos* BuscarPorCodigo(string _codigo, cMusimundo* musimundo);
 	cLista<cElectrodomesticos>* BuscarPorMarca(string _marca, cMusimundo* musimundo);
 	cLista<cElectrodomesticos>* BuscarporTipoyNombre(string _tipo, string _nombre, cMusimundo* musimundo);
-	void RemitirProducto(cDespachante* despachante, cMusimundo* musimundo);
-
+	void RemitirProducto(cDespachante* despachante, cMusimundo* musimundo, cVendedor* vendedor);
+	
 	virtual bool FuncionamientoIncorrecto()=0;
 	virtual string to_string()=0;
 	virtual void imprimir()=0;
 
 	~cElectrodomesticos();
-
+	void set_precio(float precio) {
+		this->precio = precio;
+	}
 	bool get_peso() {
 		return this->peso;
 	}

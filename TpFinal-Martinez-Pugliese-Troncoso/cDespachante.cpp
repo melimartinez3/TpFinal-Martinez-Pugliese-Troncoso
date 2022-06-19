@@ -1,4 +1,5 @@
 #include "cDespachante.h"
+#include "cMusimundo.h"
 
 cDespachante::cDespachante(string _cod_operacion,string nombre, string _dni, string fechanac, string cod, float _sueldo, char _turno):cEmpleado(nombre, _dni, fechanac, cod,_sueldo, _turno)
 {
@@ -12,7 +13,7 @@ bool cDespachante::TestearElectrodomestrico(cElectrodomesticos* electrodomestico
 }
 
 
- bool cDespachante::DespacharProducto(cElectrodomesticos* electrodomestico,cMusimundo*musimundo) {
+ bool cDespachante::DespacharProducto(cElectrodomesticos* electrodomestico,cMusimundo*musimundo,cVendedor* vendedor) {
 	bool chequeo = TestearElectrodomestrico(electrodomestico);
 
 	time_t rawtime;
@@ -28,7 +29,7 @@ bool cDespachante::TestearElectrodomestrico(cElectrodomesticos* electrodomestico
 		return false;//no se puedo despachar el producto porque esta fallado
 	else
 	{
-		musimundo->VendidosenelDia(dia_hoy, mes_hoy, anio_hoy, electrodomestico);
+		musimundo->VendidosenelDia(dia_hoy, mes_hoy, anio_hoy, electrodomestico,vendedor);
 		musimundo->lista_electrodomesticos->operator-(electrodomestico);
 
 		return true;//el producto funciona bien y se eliminó de la lista porque se despachó

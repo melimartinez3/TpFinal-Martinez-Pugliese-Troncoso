@@ -20,6 +20,11 @@ public:
     cElectrodomesticos* ElegirProducto(cLista<cElectrodomesticos>* listaelectro);
     void IngresarTarjeta();
     ~cCliente();
-
+    float get_saldo() {
+        return this->saldo;
+    }
+    void set_saldo(float nuevo) {
+        this->saldo = nuevo;
+    }
 };
 

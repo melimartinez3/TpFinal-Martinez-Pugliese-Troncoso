@@ -1,5 +1,6 @@
 #include "cCliente.h"
 
+
 cCliente::cCliente(string nombre, string _dni, string fechanac, eMedioPago mediopago, float _saldo, int compras):cPersona(nombre, _dni, fechanac)
 {
 	this->mediodepago = mediopago;
@@ -10,8 +11,10 @@ cCliente::cCliente(string nombre, string _dni, string fechanac, eMedioPago medio
 
 void cCliente::Comprar(cLista<cElectrodomesticos>* listaelectro, cMusimundo* musimundo)
 {
+	cElectrodomesticos* aux = NULL;
 	for (int i = 0; i < cantcompras; i++) {
-		cElectrodomesticos* aux = ElegirProducto(listaelectro);
+	aux= ElegirProducto(listaelectro);
+
 		if (aux != NULL) {
 			if (mediodepago == credito || mediodepago == debito || mediodepago == mercadopago) {
 
@@ -24,12 +27,18 @@ void cCliente::Comprar(cLista<cElectrodomesticos>* listaelectro, cMusimundo* mus
 					cerr << "No se puede realizar la compra" << endl;
 					return;
 				}
+
 				musimundo->ProductoAVender(aux);
 			}
 		}
 		else
-			cout << "El cliente es de libra y no se pudo decir :/" << endl;
+			cout << "El cliente es de libra (como fiona) y no se pudo decidir :/" << endl; //SACAR
 	}
+	float precio = aux->get_precio();
+	float saldo = this->get_saldo();
+	this->set_saldo(saldo - precio);
+
+	musimundo->Con_o_Sin_Descuento();
 }
 
 cElectrodomesticos* cCliente::ElegirProducto(cLista<cElectrodomesticos>* listaelectro)
@@ -45,6 +54,7 @@ cElectrodomesticos* cCliente::ElegirProducto(cLista<cElectrodomesticos>* listael
 		return listaelectro->lista[prod];
 	else
 	return NULL;
+
 }
 
 void cCliente::IngresarTarjeta()

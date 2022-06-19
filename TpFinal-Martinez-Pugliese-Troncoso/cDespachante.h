@@ -1,19 +1,22 @@
 #pragma once
-#include "cMusimundo.h";
-#include "cVendedor.h"
+#include "cEmpleado.h"
+class cMusimundo;
+
 
 using namespace std;
 
-class cDespachante:
+class cDespachante :
 	public cEmpleado
 {
 private:
+
 	string cod_operacion;
 	
 public:
+
 	cDespachante(string _cod_operacion, string nombre, string _dni, string fechanac, string cod, float _sueldo, char _turno);
 	bool TestearElectrodomestrico(cElectrodomesticos* electrodomestico);
-	bool DespacharProducto(cElectrodomesticos* electrodomestico, cMusimundo* musimundo);
+	bool DespacharProducto(cElectrodomesticos* electrodomestico, cMusimundo* musimundo, cVendedor* vendedor);
 	string to_string();
 	void imprimir();
 	~cDespachante();
