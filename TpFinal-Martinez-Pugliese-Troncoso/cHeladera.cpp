@@ -4,9 +4,10 @@ cHeladera::cHeladera(int _temperatura, string _marca, float _peso, float _precio
 {
 	this->temperatura = _temperatura;
 	this->horaenchufado = 0;
+	stockactual++;
 }
 
-int cHeladera::stockactual = 6;
+int cHeladera::stockactual = 6; //arancamos con 6 para probar el programa. En realidad debería estar en 0
 
 cHeladera:: cHeladera(const cHeladera& heladera):cElectrodomesticos(heladera.marca, heladera.peso, heladera.precio, heladera.codigo, heladera.tipo, heladera.dimensiones->get_ancho(), heladera.dimensiones->get_alto(), heladera.dimensiones->get_profundidad())
 {
@@ -65,23 +66,22 @@ bool cHeladera::FuncionamientoIncorrecto()
 
 }
 
-string cHeladera::to_string() {
+string cHeladera::tostring() {
 
 	string precio_string, dato,temp_string;
-	stringstream sstream;
+		
+	float precio_ = get_precio();
+	precio_string = to_string(precio_);
+	int temp = get_temperatura();
+	temp_string = to_string(temp);
 
-	sstream << precio_string;
-	precio_string = sstream.str();
 
-	sstream << temp_string;
-	temp_string = sstream.str();
-
-	dato = "\nHeladera: Marca: " + marca + " Precio: " + precio_string + " Codigo: " + codigo + " Tipo: " + tipo + " Temperatura: " + temp_string;
+	dato = "\nHeladera: Marca: " + marca + " Precio: " + precio_string + " Codigo: " + codigo + " Tipo: " + tipo + " Temperatura en grados centigrados: " + temp_string;
 	return dato;
 }
 
 void cHeladera::imprimir() {
-	string dato = to_string();
+	string dato = tostring();
 	cout << dato;
 }
 

@@ -18,7 +18,7 @@ public:
     cHeladera(const cHeladera& heladera);
     bool FuncionamientoIncorrecto();
     void EnchufarHeladera();
-    string to_string();
+    string tostring();
     void imprimir();
     //declarar static
     ~cHeladera();

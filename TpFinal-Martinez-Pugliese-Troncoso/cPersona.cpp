@@ -1,8 +1,27 @@
 #include "cPersona.h"
 
 
-cPersona::cPersona(string nombre, string _dni, string fecha) {
-	this->nombrecompleto = nombre;
-	this->dni = _dni;
-	this->fechanacimiento;
+cPersona::cPersona() {
+	this->nombrecompleto = " ";
+	this->dni = " ";
 }
+
+ostream& operator<<(ostream& out, const cPersona& persona)
+{
+	out << "Nombre y Apellido: " << persona.nombrecompleto << "DNI: " << persona.dni;
+	return out;
+}
+istream& operator>>(istream& in, cPersona& persona)
+{
+	cout << "Ingresar Nombre y Apellido: " << endl;
+	string nom;
+	in >> nom;
+	persona.nombrecompleto = nom;
+	cout << "Ingresar DNI: " << endl;
+	string dni_;
+	in >> dni_;
+	persona.dni = dni_;
+
+	return in;
+}
+

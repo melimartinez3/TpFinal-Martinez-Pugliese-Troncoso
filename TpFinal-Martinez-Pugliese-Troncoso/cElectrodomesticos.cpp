@@ -59,23 +59,6 @@ cLista<cElectrodomesticos>* cElectrodomesticos::BuscarporTipoyNombre(string _tip
 	return aux;
 }
 
-void cElectrodomesticos::RemitirProducto(cDespachante* despachante, cMusimundo* musimundo,cVendedor*vendedor) {
-
-	bool chequeo=despachante->DespacharProducto(this,musimundo,vendedor);
-	if (chequeo)
-	{
-		time_t rawtime;
-		struct tm timeinfo;
-		time(&rawtime);
-		localtime_s(&timeinfo, &rawtime);
-
-		int dia_hoy = timeinfo.tm_mday;
-		int mes_hoy = timeinfo.tm_mon;
-		int anio_hoy = timeinfo.tm_year - 100;
-
-		musimundo->VendidosenelDia(dia_hoy, mes_hoy, anio_hoy,this,vendedor);
-	}
-}
 
 cElectrodomesticos::~cElectrodomesticos()
 {

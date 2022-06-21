@@ -57,29 +57,24 @@ bool cTelevisor::FuncionamientoIncorrecto() {
 
 }
 
-string cTelevisor::to_string() {
+string cTelevisor::tostring() {
 	string dato;
-	string volumen_string, stockactual_string, cablee, precio_string;
+	string volumen_string, cablee, precio_string;
 	if (cable == true)
 		cablee = "Si";
 	else
 		cablee = "No";
+	int volumen = get_volumen();
+	volumen_string = to_string(volumen);
+	float precio_ = get_precio();
+	precio_string = to_string(precio_);
 
-	stringstream sstream;
-	sstream << volumen;
-	volumen_string = sstream.str();
-
-	sstream << stockactual_string;
-	stockactual_string = sstream.str();
-
-	sstream << precio_string;
-	precio_string = sstream.str();
-	dato = "\nTelevisor: Marca: "+ marca+ " Precio: "+ precio_string+ " Codigo: "+ codigo+ " Tipo: "+ tipo+ " Volumen : " + volumen_string + " Stock actual : " + stockactual_string + " Clabe conectado : " + cablee;
+	dato = "\nTelevisor: Marca: "+ marca+ " Precio: "+ precio_string+ " Codigo: "+ codigo+ " Tipo: "+ tipo+ " Volumen : " + volumen_string + " Cable conectado : " + cablee;
 	return dato;
 }
 
 void cTelevisor::imprimir() {
-	string dato = to_string();
+	string dato = tostring();
 	cout << dato;
 }
 

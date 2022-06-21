@@ -15,10 +15,11 @@ private:
     int cantcompras;
 
 public:
-    cCliente(string nombre, string _dni, string fechanac, eMedioPago mediopago, float _saldo, int compras);
-    void Comprar(cLista<cElectrodomesticos>* listaelectro, cMusimundo* musimundo);
+    cCliente();
+    void Comprar(cMusimundo* musimundo, int dia, int mes, int anio);
     cElectrodomesticos* ElegirProducto(cLista<cElectrodomesticos>* listaelectro);
     void IngresarTarjeta();
+    void PedirDatosCliente();
     ~cCliente();
     float get_saldo() {
         return this->saldo;
@@ -26,5 +27,8 @@ public:
     void set_saldo(float nuevo) {
         this->saldo = nuevo;
     }
+
+    friend ostream& operator<<(ostream& out, const cCliente& cliente);
+    friend istream& operator>>(istream& in, cCliente& cliente);
 };
 

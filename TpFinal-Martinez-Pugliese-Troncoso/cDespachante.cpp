@@ -1,9 +1,9 @@
 #include "cDespachante.h"
 #include "cMusimundo.h"
 
-cDespachante::cDespachante(string _cod_operacion,string nombre, string _dni, string fechanac, string cod, float _sueldo, char _turno):cEmpleado(nombre, _dni, fechanac, cod,_sueldo, _turno)
+cDespachante::cDespachante():cEmpleado()
 {
-	this->cod_operacion = _cod_operacion;
+
 }
 bool cDespachante::TestearElectrodomestrico(cElectrodomesticos* electrodomestico) {
 	bool control = electrodomestico->FuncionamientoIncorrecto();
@@ -13,7 +13,10 @@ bool cDespachante::TestearElectrodomestrico(cElectrodomesticos* electrodomestico
 }
 
 
- bool cDespachante::DespacharProducto(cElectrodomesticos* electrodomestico,cMusimundo*musimundo,cVendedor* vendedor) {
+ bool cDespachante::DespacharProducto(string codigo,cMusimundo*musimundo) {
+
+	cElectrodomesticos* electrodomestico = musimundo->lista_electrodomesticos->lista[musimundo->lista_electrodomesticos->Buscar(codigo)];
+
 	bool chequeo = TestearElectrodomestrico(electrodomestico);
 
 	time_t rawtime;
@@ -29,24 +32,13 @@ bool cDespachante::TestearElectrodomestrico(cElectrodomesticos* electrodomestico
 		return false;//no se puedo despachar el producto porque esta fallado
 	else
 	{
-		musimundo->VendidosenelDia(dia_hoy, mes_hoy, anio_hoy, electrodomestico,vendedor);
 		musimundo->lista_electrodomesticos->operator-(electrodomestico);
-
 		return true;//el producto funciona bien y se eliminó de la lista porque se despachó
 	}
 }
 
-string cDespachante::to_string() {
-	string dato;
-	dato = "\nDespachante: Codigo Operacion " + cod_operacion;
-	return dato;
-}
-void cDespachante::imprimir() {
-	string dato = to_string();
-	cout << dato;
-}
+
 cDespachante::~cDespachante()
 {
 	
-
 }

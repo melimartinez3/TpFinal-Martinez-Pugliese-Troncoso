@@ -107,23 +107,21 @@ case 2: {
 }
 }
 
-string cMicroondas::to_string() {
+string cMicroondas::tostring() {
 
 	string precio_string,dato, potencia_string;
-	stringstream sstream;
-
-	sstream << precio_string;
-	precio_string = sstream.str();
-
-	sstream << potencia_string;
-	potencia_string = sstream.str();
+	
+	float precio_ = get_precio();
+	precio_string = to_string(precio_);
+	int potenciaa = get_potenciamaxima();
+	potencia_string = to_string(potenciaa);
 
 	dato = "\nMicroondas: Marca: " + marca + " Precio: " + precio_string + " Codigo: " + codigo + " Tipo: " + tipo + " Potencia: " + potencia_string;
 	return dato;
 }
 
 void cMicroondas::imprimir() {
-	string dato = to_string();
+	string dato = tostring();
 	cout << dato;
 }
 

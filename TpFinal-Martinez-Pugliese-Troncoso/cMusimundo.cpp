@@ -6,6 +6,8 @@ cMusimundo::cMusimundo() :stockminimo(5)
 	this->totalrecaudado = 0;
 	lista_electrodomesticos = new cLista<cElectrodomesticos>(TMAX);
 	lista_vendidos = new cLista<cElectrodomesticos>(TMAX);
+	lista_vendedores = new cLista<cVendedor>(TMAX);
+	lista_despachantes = new cLista<cDespachante>(TMAX);
 }
 
 int cMusimundo::vendidos_dia = 0;
@@ -31,6 +33,7 @@ cElectrodomesticos* cMusimundo::ProductoAVender(cElectrodomesticos* electrodomes
 		int n = microondas->get_stock();
 		microondas->set_stock(n--);
 
+
 	}
 	else if (televisor != NULL)
 	{
@@ -48,8 +51,42 @@ cElectrodomesticos* cMusimundo::ProductoAVender(cElectrodomesticos* electrodomes
 	return aux_elect;
 }
 
-void cMusimundo::VendidosenelDia(int dia, int mes, int anio, cElectrodomesticos* vendido, cVendedor* vendedor) {
+cVendedor* cMusimundo:: EleccionVendedor()
+{
+	int n = lista_vendedores->get_cant_actual();
+	bool ok =false;
+	int pos;
+
+	do
+	{
+	    pos = rand() % n;
+		if (lista_vendedores->lista[pos] != NULL)
+		{
+			ok = lista_vendedores->lista[pos]->get_atendiendo();
+			
+		}
+			
+	} while (ok != true);
+
+	return lista_vendedores->lista[pos]; 
+
+	/*No se va a salir del bucle hasta que se encuentre un vendedor disponible. Asumimos que el cliente se 
+	quedará esperando*/
+
+}
+
+void cMusimundo::DespacharProducto(string codigo)
+{
+	int n = lista_despachantes->get_cant_actual();
+	int pos = rand() % n;
+
+	lista_despachantes->lista[pos]->DespacharProducto(codigo, this);
+}
+
+void cMusimundo::VendidosenelDia(int dia, int mes, int anio, cElectrodomesticos* vendido) {
 	
+	cVendedor* vendedor = EleccionVendedor();
+
 	time_t rawtime;
 	struct tm timeinfo;
 	time(&rawtime);
@@ -83,6 +120,7 @@ void cMusimundo::VendidosenelDia(int dia, int mes, int anio, cElectrodomesticos*
 }
 
 cLista<cElectrodomesticos>* cMusimundo::VerificarStockMinimo() {
+
 	cLista<cElectrodomesticos>* aux = new cLista<cElectrodomesticos>(TMAX);
 	int n = lista_electrodomesticos->get_cant_actual();
 
@@ -111,6 +149,11 @@ cLista<cElectrodomesticos>* cMusimundo::VerificarStockMinimo() {
 		}
 	}
 
+	n = aux->get_cant_actual();
+	if (n == 0)
+	{
+		return NULL;
+	}
 
 	return aux;
 }
@@ -210,7 +253,12 @@ void cMusimundo::AgregarTelevisores(cLista<cElectrodomesticos>* aux, int cant)
 cLista<cElectrodomesticos>* cMusimundo::CompletarStock() {
 	
 	cLista<cElectrodomesticos>* aux = VerificarStockMinimo();
-	
+
+	if (aux == NULL)
+	{
+		return NULL;
+	}
+
 	int n = aux->get_cant_actual();
 
 	int cont_h = 0;
@@ -275,6 +323,12 @@ cLista<cElectrodomesticos>* cMusimundo::CompletarStock() {
 cLista<cElectrodomesticos>* cMusimundo::VerificarCostoListaCompleta() {
 	
 	cLista<cElectrodomesticos>* aux = CompletarStock();
+
+	if (aux == NULL)
+	{
+		return NULL;
+	}
+
 	float acum = 0;
 	int n = aux->get_cant_actual();
 
@@ -384,7 +438,14 @@ void cMusimundo::Con_o_Sin_Descuento() {
 cMusimundo::~cMusimundo()
 {
 	if (lista_electrodomesticos != NULL)
-	{
 		delete lista_electrodomesticos;
-	}
+
+	if (lista_vendidos != NULL)
+		delete lista_vendidos;
+
+	if (lista_vendedores != NULL)
+		delete lista_vendedores;
+
+	if (lista_despachantes != NULL)
+		delete lista_despachantes;
 }

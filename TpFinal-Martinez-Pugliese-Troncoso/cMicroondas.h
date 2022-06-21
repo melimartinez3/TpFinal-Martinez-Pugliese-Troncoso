@@ -30,7 +30,7 @@ public:
     void EnchufarMicroondas();
     void AjustePotenciaMaxima();
     bool ChequeoEncendidoPor1Min();
-    string to_string();
+    string tostring();
     void imprimir();
     ~cMicroondas();
     

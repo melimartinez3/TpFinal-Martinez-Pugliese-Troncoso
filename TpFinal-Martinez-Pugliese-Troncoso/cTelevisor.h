@@ -17,7 +17,7 @@ public:
     cTelevisor(const cTelevisor& televisar);
     bool FuncionamientoIncorrecto();
     bool Falla_EncenderTelevisor();
-    string to_string();
+    string tostring();
     void imprimir();
     ~cTelevisor();
 

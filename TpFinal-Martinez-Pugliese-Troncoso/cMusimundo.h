@@ -17,6 +17,8 @@ private:
 	const int stockminimo;
 	cLista<cElectrodomesticos>* lista_electrodomesticos;
 	cLista<cElectrodomesticos>* lista_vendidos;
+	cLista<cVendedor>* lista_vendedores;
+	cLista<cDespachante>* lista_despachantes;
 
 public:
 	friend class cDespachante;
@@ -24,7 +26,7 @@ public:
 	cMusimundo();
 
 
-	void VendidosenelDia(int dia, int mes, int anio, cElectrodomesticos* vendido, cVendedor* vendedor);
+	void VendidosenelDia(int dia, int mes, int anio, cElectrodomesticos* vendido);
 	cLista<cElectrodomesticos>* VerificarStockMinimo();// devolvemos en una lista todos los electrodomesticos que tienen un stock menor a 5
 	cLista<cElectrodomesticos>* CompletarStock();// llamamos a la funcion de verificar el stock minimo y a los elementos que tengan uno menor a 5 las completamos
 	cLista<cElectrodomesticos>* VerificarCostoListaCompleta();// devuelve true si vale mas de 20000
@@ -40,6 +42,8 @@ public:
 	void AgregarHeladeras(cLista<cElectrodomesticos>* aux, int cantidad);
 	void AgregarMicroondas(cLista<cElectrodomesticos>* aux, int cantidad);
 	void AgregarTelevisores(cLista<cElectrodomesticos>* aux, int cantidad);
+	cVendedor* EleccionVendedor();
+	void DespacharProducto(string codigo);
 
 	cElectrodomesticos* ProductoAVender(cElectrodomesticos* electrodomestico);
 	~cMusimundo();
@@ -53,6 +57,21 @@ public:
 	}
 	int get_stockminimo() {
 		return this->stockminimo;
+	}
+
+	cLista<cElectrodomesticos>* get_lista_electrodomesticos()
+	{
+		return lista_electrodomesticos;
+	}
+
+	cLista<cVendedor>* get_lista_vendedores()
+	{
+		return lista_vendedores;
+	}
+
+	cLista<cDespachante>* get_lista_despachantes()
+	{
+		return lista_despachantes;
 	}
 };
 

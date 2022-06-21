@@ -6,12 +6,13 @@ class cEmpleado :
     public cPersona
 {
 private:
-    string codigo;// determina si es vendedor(33) o despachante(44) 
+    const int codigo;
+    static int cont_codigo;
     float sueldo;
     char turno; // M mañana T tarde N noche
     bool atendiendo;
 public:
-    cEmpleado(string nombre, string _dni, string fechanac, string cod, float _sueldo, char _turno);
+    cEmpleado();
     void FicharEntrada();
     void FicharSalida();
     virtual~cEmpleado() {};
@@ -20,5 +21,12 @@ public:
         this->sueldo += _sueldo;
     }
 
+    bool get_atendiendo()
+    {
+        return this->atendiendo;
+    }
+
+    friend ostream& operator<<(ostream& out, const cEmpleado& empleado);
+    friend istream& operator>>(istream& in, cEmpleado& empleado);
 };
 

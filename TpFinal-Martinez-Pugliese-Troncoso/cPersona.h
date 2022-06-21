@@ -11,9 +11,8 @@ class cPersona
 private:
 	string nombrecompleto;
 	string dni;
-	string fechanacimiento;
 public:
-	cPersona(string nomyap, string _dni, string fechanac);
+	cPersona();
 	virtual ~cPersona() {};
 	string get_nombre() {
 		return this->nombrecompleto;
@@ -21,8 +20,9 @@ public:
 	string get_dni() {
 		return this->dni;
 	}
-	string get_fechanac() {
-		return this->fechanacimiento;
-	}
+
+	friend ostream& operator<<(ostream& out, const cPersona& persona);
+	friend istream& operator>>(istream& in, cPersona& persona);
+
 };
 

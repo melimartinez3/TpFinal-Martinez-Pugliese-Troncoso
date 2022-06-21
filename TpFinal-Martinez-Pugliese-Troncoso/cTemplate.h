@@ -18,10 +18,11 @@ public:
 	friend class cMusimundo;
 	friend class cCliente;
 	friend class cVendedor;
+	friend class cDespachante;
 
 	cLista(int _tamtotal);
 	void operator+(T* nuevo);
-	/*int	Buscar(string busqueda);*/
+	int	Buscar(string busqueda);
 	T* operator-(T* aeliminar);
 	cLista<T>* Filtrar(string parametro);
 	friend ostream& operator<< <>(ostream& out, const cLista<T>&);
@@ -71,22 +72,22 @@ void cLista<T>::operator+(T* nuevo) {
 /// </summary>
 /// <param name="busqueda"></param>
 /// <returns></returns>
-//template <class T>
-//int	cLista<T>::Buscar(string busqueda) {
-//
-//	int i;
-//
-//	for (i = 0; i < cantactual; i++) //recorremos toda la lista
-//	{
-//		if (*lista[i] == busqueda) //si encontramos al elemento buscado
-//			return i; //devolvemos su posicion
-//	}
-//
-//	if (i == cantactual)
-//	{
-//		return -1; //si no lo encontramos retornamos -1
-//	}
-//}
+template <class T>
+int	cLista<T>::Buscar(string busqueda) {
+
+	int i;
+
+	for (i = 0; i < cantactual; i++) //recorremos toda la lista
+	{
+		if (lista[i] == busqueda) //si encontramos al elemento buscado
+			return i; //devolvemos su posicion
+	}
+
+	if (i == cantactual)
+	{
+		return -1; //si no lo encontramos retornamos -1
+	}
+}
 
 /// <summary>
 /// Operator []

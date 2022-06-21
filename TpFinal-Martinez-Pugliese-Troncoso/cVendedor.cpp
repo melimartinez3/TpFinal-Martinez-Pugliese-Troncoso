@@ -1,6 +1,6 @@
 #include "cVendedor.h"
 
-cVendedor::cVendedor(string nombre, string _dni, string fechanac, string cod, float _sueldo, char _turno, bool _carisma):cEmpleado(nombre, _dni, fechanac, cod, _sueldo, _turno)
+cVendedor::cVendedor():cEmpleado()
 {
 	this->vendidos = 0;
 	this->comision = 0;
@@ -35,6 +35,7 @@ void cVendedor::EliminarYCrearNuevaLista()
 	listaelectro = new cLista<cElectrodomesticos>(TMAX);
 
 }
+
 
 cVendedor::~cVendedor()
 {

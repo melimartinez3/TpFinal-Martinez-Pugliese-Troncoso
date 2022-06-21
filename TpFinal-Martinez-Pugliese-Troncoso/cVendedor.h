@@ -9,10 +9,11 @@ class cVendedor :
     int vendidos;
     cLista<cElectrodomesticos>* listaelectro;
 public:
-    cVendedor(string nombre, string _dni, string fechanac, string cod, float _sueldo, char _turno, bool _carisma);
+    cVendedor();
     void CalcularComision();
     void AgregarElectrodomesticoVendido(cElectrodomesticos* electrodomestico);
     void EliminarYCrearNuevaLista();
     ~cVendedor();
+
 };
 

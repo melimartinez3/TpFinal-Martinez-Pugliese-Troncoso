@@ -1,19 +1,19 @@
 #include "cCliente.h"
 
 
-cCliente::cCliente(string nombre, string _dni, string fechanac, eMedioPago mediopago, float _saldo, int compras):cPersona(nombre, _dni, fechanac)
+cCliente::cCliente():cPersona()
 {
-	this->mediodepago = mediopago;
+	this->mediodepago = efectivo;
 	this->tarjeta = 0;
-	this->saldo = _saldo;
-	this->cantcompras = compras;
+	this->saldo = (float)((rand() % 200000) + 20000);
+	this->cantcompras = 0;
 }
 
-void cCliente::Comprar(cLista<cElectrodomesticos>* listaelectro, cMusimundo* musimundo)
+void cCliente::Comprar(cMusimundo* musimundo, int dia, int mes, int anio)
 {
 	cElectrodomesticos* aux = NULL;
 	for (int i = 0; i < cantcompras; i++) {
-	aux= ElegirProducto(listaelectro);
+	aux= ElegirProducto(musimundo->get_lista_electrodomesticos());
 
 		if (aux != NULL) {
 			if (mediodepago == credito || mediodepago == debito || mediodepago == mercadopago) {
@@ -27,25 +27,32 @@ void cCliente::Comprar(cLista<cElectrodomesticos>* listaelectro, cMusimundo* mus
 					cerr << "No se puede realizar la compra" << endl;
 					return;
 				}
-
-				musimundo->ProductoAVender(aux);
+		
 			}
 		}
 		else
+		{
 			cout << "El cliente es de libra (como fiona) y no se pudo decidir :/" << endl; //SACAR
+			return;
+		}
 	}
+
+	musimundo->ProductoAVender(aux);
 	float precio = aux->get_precio();
 	float saldo = this->get_saldo();
 	this->set_saldo(saldo - precio);
 
 	musimundo->Con_o_Sin_Descuento();
+	musimundo->VendidosenelDia(dia, mes, anio, aux);
+	musimundo->DespacharProducto(aux->get_codigo());
+	return;
 }
 
 cElectrodomesticos* cCliente::ElegirProducto(cLista<cElectrodomesticos>* listaelectro)
 {
 	int n=listaelectro->get_cant_actual();
 	for (int i = 0; i < n; i++) {
-		cout << i <<"- "<< listaelectro->lista[i]->to_string() << endl;
+		cout << i <<"- "<< listaelectro->lista[i]->tostring() << endl;
 	}
 	int prod;
 	cout << "Elija el producto a comprar: ";
@@ -79,6 +86,67 @@ void cCliente::IngresarTarjeta()
 	} while (suma != 16);
 		
 }
+
+ostream& operator<<(ostream& out, const cCliente& cliente)
+{
+	out << (cPersona&)cliente;
+	out << "Cantidad de productos a comprar:" << cliente.cantcompras << endl;
+
+	string medp;
+
+	if (cliente.mediodepago == efectivo)
+		medp = "efectivo";
+	if (cliente.mediodepago == credito)
+		medp = "credito";
+	if (cliente.mediodepago == debito)
+		medp = "debito";
+	if (cliente.mediodepago == mercadopago)
+		medp = "mercadopago";
+
+	out << "Medio de Pago:" << medp << endl;
+
+	return out;
+}
+
+istream& operator>>(istream& in, cCliente& cliente)
+{
+	in >> (cPersona&)cliente;
+	
+	cout << "Ingresar la cantidad de productos a comprar: ";
+	int cant;
+	in >> cant;
+	cliente.cantcompras = cant;
+	cout << endl;
+	cout << "Ingresar el medio de pago (E para efectivo, C para credito, D para debito y M para mercadopago): ";
+	char medp;
+	in >> medp;
+	if (medp == 'E' || medp == 'e')
+		cliente.mediodepago = efectivo;
+	if (medp == 'C' || medp == 'c')
+		cliente.mediodepago = credito;
+	if (medp == 'D' || medp == 'd')
+		cliente.mediodepago = debito;
+	if (medp == 'M' || medp == 'm')
+		cliente.mediodepago = mercadopago;
+
+	cout << endl;
+	if (cliente.mediodepago == credito || cliente.mediodepago == debito)
+	{
+		cout << "Ingresar el numero de tarjeta: ";
+		int tarj;
+		in >> tarj;
+		cliente.tarjeta = tarj;
+	}
+
+	return in;
+	
+}
+
+void cCliente::PedirDatosCliente()
+{
+	cin >> *this;
+}
+
 
 cCliente::~cCliente()
 {
