@@ -15,12 +15,14 @@ istream& operator>>(istream& in, cPersona& persona)
 {
 	cout << "Ingresar Nombre y Apellido: " << endl;
 	string nom;
-	in >> nom;
+	in >> nom;	
 	persona.nombrecompleto = nom;
+	fflush(stdin);
 	cout << "Ingresar DNI: " << endl;
 	string dni_;
 	in >> dni_;
 	persona.dni = dni_;
+	fflush(stdin);
 
 	return in;
 }

@@ -15,7 +15,7 @@ bool cDespachante::TestearElectrodomestrico(cElectrodomesticos* electrodomestico
 
  bool cDespachante::DespacharProducto(string codigo,cMusimundo*musimundo) {
 
-	cElectrodomesticos* electrodomestico = musimundo->lista_electrodomesticos->lista[musimundo->lista_electrodomesticos->Buscar(codigo)];
+	 cElectrodomesticos* electrodomestico = musimundo->BuscarPorCodigo(codigo);
 
 	bool chequeo = TestearElectrodomestrico(electrodomestico);
 

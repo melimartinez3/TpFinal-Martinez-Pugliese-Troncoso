@@ -27,10 +27,6 @@ protected:
 public:
 
 	cElectrodomesticos(string _marca, float _peso, float _precio, string _codigo, string _tipo, float _ancho, float _alto, float _profundidad);// declarar los const
-	cElectrodomesticos* BuscarPorCodigo(string _codigo, cMusimundo* musimundo);
-	cLista<cElectrodomesticos>* BuscarPorMarca(string _marca, cMusimundo* musimundo);
-	cLista<cElectrodomesticos>* BuscarporTipoyNombre(string _tipo, string _nombre, cMusimundo* musimundo);
-	
 	virtual bool FuncionamientoIncorrecto()=0;
 	virtual string tostring()=0;
 	virtual void imprimir()=0;

@@ -44,8 +44,10 @@ public:
 	void AgregarTelevisores(cLista<cElectrodomesticos>* aux, int cantidad);
 	cVendedor* EleccionVendedor();
 	void DespacharProducto(string codigo);
-
 	cElectrodomesticos* ProductoAVender(cElectrodomesticos* electrodomestico);
+	cElectrodomesticos* BuscarPorCodigo(string _codigo);
+	cLista<cElectrodomesticos>* BuscarPorMarca(string _marca);
+	cLista<cElectrodomesticos>* BuscarporTipoyNombre(string _tipo, string _nombre);
 	~cMusimundo();
 
 	void set_totalrecaudado(float nuevorecaudo) {

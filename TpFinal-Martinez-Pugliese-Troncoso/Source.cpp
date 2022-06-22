@@ -43,6 +43,7 @@ int main() {
 		}
 	}
 
+	ClientePorMinuto(musimundo);
 	//adentro del bucle
 	musimundo->Determinar_Descuento(); //se fija si es o no el dia 31 del mes para aplicar el descuento
 	
@@ -64,15 +65,15 @@ int main() {
 
 void ClientePorMinuto(cMusimundo* musimundo)
 {
-	clock_t start;
-	int iterations = 0;
+	clock_t inicio;
+	int contador = 0;
 
 	do {
-		start = clock();
+		inicio = clock();
 
 		do {
 
-			if (clock() - start == 60)
+			if (clock() - inicio== 60)
 			{
 				cCliente* cliente = new cCliente();
 				cliente->PedirDatosCliente();
@@ -81,7 +82,7 @@ void ClientePorMinuto(cMusimundo* musimundo)
 				cout << *cliente;
 				cliente->Comprar(musimundo, 20, 06, 2022);
 			
-				iterations++;
+				contador++;
 				break;
 			}
 
@@ -89,5 +90,5 @@ void ClientePorMinuto(cMusimundo* musimundo)
 
 		} while (1);
 
-	} while (iterations < 5);
+	} while (contador < 3);
 }

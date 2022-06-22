@@ -36,6 +36,13 @@ void cVendedor::EliminarYCrearNuevaLista()
 
 }
 
+//cLista<cElectrodomesticos>* BuscarProducto(string detalle, cMusimundo* musimundo) {
+//	int n = musimundo->get_lista_electrodomesticos()->get_cant_actual();
+//	cLista<cElectrodomesticos>* aux = musimundo->get_lista_electrodomesticos();
+//	for (int i = 0; i < n; i++) {
+//		if(detalle == aux->)
+//	}
+//}
 
 cVendedor::~cVendedor()
 {

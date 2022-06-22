@@ -62,8 +62,8 @@ cVendedor* cMusimundo:: EleccionVendedor()
 	    pos = rand() % n;
 		if (lista_vendedores->lista[pos] != NULL)
 		{
-			ok = lista_vendedores->lista[pos]->get_atendiendo();
-			
+			ok = lista_vendedores->lista[pos]->get_atendiendo();// elegimos al primer vendedor disponible
+			break;
 		}
 			
 	} while (ok != true);
@@ -320,6 +320,7 @@ cLista<cElectrodomesticos>* cMusimundo::CompletarStock() {
 	que aparezca de cada tipo, ya se va a satisfacer lo pedido*/
 
 }
+
 cLista<cElectrodomesticos>* cMusimundo::VerificarCostoListaCompleta() {
 	
 	cLista<cElectrodomesticos>* aux = CompletarStock();
@@ -352,6 +353,7 @@ cLista<cElectrodomesticos>* cMusimundo::VerificarCostoListaCompleta() {
 
 	return aux;
 }
+
 void cMusimundo::AgregarListaAlStock() {
 
 	cLista<cElectrodomesticos>* aux = VerificarCostoListaCompleta();
@@ -369,11 +371,13 @@ void cMusimundo::AgregarListaAlStock() {
 	return;
 
 }
+
 cElectrodomesticos& operator++(cElectrodomesticos& electro) {
 	float precio_anterior = electro.get_precio();
 	electro.set_precio(1.25 * precio_anterior);
 	return electro;
 }
+
 cElectrodomesticos& operator--(cElectrodomesticos& electro) {
 	float precio_anterior = electro.get_precio();
 	electro.set_precio(0.8 * precio_anterior);
@@ -393,9 +397,10 @@ void cMusimundo::imprimir() {
 	int n = lista_vendidos->get_cant_actual();
 
 	cout << "\nLos electrodomesticos vendidos en el dia fueron: ";
-	cout << lista_vendidos->lista;
+	cout << lista_vendidos;
 
 }
+
 void cMusimundo::Determinar_Descuento() {
 	time_t rawtime;
 	struct tm timeinfo;
@@ -434,6 +439,53 @@ void cMusimundo::Con_o_Sin_Descuento() {
 	int dia_hoy = timeinfo.tm_mday;
 	if (dia_hoy == 31)
 		cout << "\nEsta comprando con descuento! Enhorabuena! ";
+}
+
+cElectrodomesticos* cMusimundo::BuscarPorCodigo(string _codigo) {
+	cElectrodomesticos* aux = NULL;
+	int pos = 0;
+	int n = this->lista_electrodomesticos->get_cant_actual();
+	for (int i = 0; i < n; i++) {
+		if (this->lista_electrodomesticos->lista[i]->get_codigo() == _codigo) {
+			aux = this->lista_electrodomesticos->lista[i];
+		}
+	}
+	return aux;
+
+}
+
+cLista<cElectrodomesticos>* cMusimundo::BuscarPorMarca(string _marca) {
+
+	int n = this->lista_electrodomesticos->get_cant_actual();
+	cLista<cElectrodomesticos>* aux = new cLista<cElectrodomesticos>(n);
+
+	for (int i = 0; i < n; i++) {
+
+		if (this->lista_electrodomesticos->lista[i]->get_marca() == _marca) {
+
+			aux->operator+(this->lista_electrodomesticos->lista[i]);
+		}
+	}
+
+	return aux;
+
+}
+
+cLista<cElectrodomesticos>* cMusimundo::BuscarporTipoyNombre(string _tipo, string _nombre) {
+
+	int n = this->lista_electrodomesticos->get_cant_actual();
+
+	cLista<cElectrodomesticos>* aux = new cLista<cElectrodomesticos>(n);
+
+	for (int i = 0; i < n; i++) {
+
+		if (this->lista_electrodomesticos->lista[i]->get_tipo() == _tipo) {
+
+			aux->operator+(this->lista_electrodomesticos->lista[i]);
+		}
+	}
+
+	return aux;
 }
 cMusimundo::~cMusimundo()
 {

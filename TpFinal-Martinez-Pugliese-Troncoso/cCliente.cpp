@@ -16,7 +16,7 @@ void cCliente::Comprar(cMusimundo* musimundo, int dia, int mes, int anio)
 	aux= ElegirProducto(musimundo->get_lista_electrodomesticos());
 
 		if (aux != NULL) {
-			if (mediodepago == credito || mediodepago == debito || mediodepago == mercadopago) {
+			if (mediodepago == credito ||mediodepago == debito || mediodepago == mercadopago){
 
 				IngresarTarjeta();
 				try {
@@ -37,7 +37,6 @@ void cCliente::Comprar(cMusimundo* musimundo, int dia, int mes, int anio)
 		}
 	}
 
-	musimundo->ProductoAVender(aux);
 	float precio = aux->get_precio();
 	float saldo = this->get_saldo();
 	this->set_saldo(saldo - precio);
@@ -45,6 +44,7 @@ void cCliente::Comprar(cMusimundo* musimundo, int dia, int mes, int anio)
 	musimundo->Con_o_Sin_Descuento();
 	musimundo->VendidosenelDia(dia, mes, anio, aux);
 	musimundo->DespacharProducto(aux->get_codigo());
+	cout << "El cliente salio";
 	return;
 }
 
@@ -57,6 +57,7 @@ cElectrodomesticos* cCliente::ElegirProducto(cLista<cElectrodomesticos>* listael
 	int prod;
 	cout << "Elija el producto a comprar: ";
 	cin >> prod;
+	fflush(stdin);
 	if (prod < n)
 		return listaelectro->lista[prod];
 	else
@@ -82,10 +83,19 @@ void cCliente::IngresarTarjeta()
 		if (suma != 16) {
 			cout << "Ingrese nuevamente su nuemro de tarjeta: " << endl;
 			cin >> tarjeta;
+			fflush(stdin);
 		}
 	} while (suma != 16);
 		
 }
+
+//bool operator==(const eMedioPago& mediopago, const eMedioPago& ingresado)
+//{
+//	if (mediopago == ingresado)
+//		return true;
+//
+//	return false;
+//}
 
 ostream& operator<<(ostream& out, const cCliente& cliente)
 {
@@ -93,14 +103,13 @@ ostream& operator<<(ostream& out, const cCliente& cliente)
 	out << "Cantidad de productos a comprar:" << cliente.cantcompras << endl;
 
 	string medp;
-
-	if (cliente.mediodepago == efectivo)
-		medp = "efectivo";
-	if (cliente.mediodepago == credito)
+	if(cliente.mediodepago==efectivo)
+		medp = "efectivo"; 
+	if (cliente.mediodepago==credito)
 		medp = "credito";
-	if (cliente.mediodepago == debito)
+	if (cliente.mediodepago==debito)
 		medp = "debito";
-	if (cliente.mediodepago == mercadopago)
+	if (cliente.mediodepago== mercadopago)
 		medp = "mercadopago";
 
 	out << "Medio de Pago:" << medp << endl;
@@ -115,6 +124,7 @@ istream& operator>>(istream& in, cCliente& cliente)
 	cout << "Ingresar la cantidad de productos a comprar: ";
 	int cant;
 	in >> cant;
+	fflush(stdin);
 	cliente.cantcompras = cant;
 	cout << endl;
 	cout << "Ingresar el medio de pago (E para efectivo, C para credito, D para debito y M para mercadopago): ";
@@ -130,14 +140,7 @@ istream& operator>>(istream& in, cCliente& cliente)
 		cliente.mediodepago = mercadopago;
 
 	cout << endl;
-	if (cliente.mediodepago == credito || cliente.mediodepago == debito)
-	{
-		cout << "Ingresar el numero de tarjeta: ";
-		int tarj;
-		in >> tarj;
-		cliente.tarjeta = tarj;
-	}
-
+	
 	return in;
 	
 }

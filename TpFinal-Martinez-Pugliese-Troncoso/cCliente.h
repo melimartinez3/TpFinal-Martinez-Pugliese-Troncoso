@@ -28,6 +28,7 @@ public:
         this->saldo = nuevo;
     }
 
+    //friend bool operator==(const eMedioPago& mediopago, const eMedioPago& ingresado);
     friend ostream& operator<<(ostream& out, const cCliente& cliente);
     friend istream& operator>>(istream& in, cCliente& cliente);
 };
