@@ -66,21 +66,18 @@ bool cHeladera::FuncionamientoIncorrecto()
 
 }
 
-string cHeladera::tostring() {
+string cHeladera::tostring()const {
 
-	string precio_string, dato,temp_string;
-		
-	float precio_ = get_precio();
-	precio_string = to_string(precio_);
-	int temp = get_temperatura();
-	temp_string = to_string(temp);
+	string dato,temp_string;
+	temp_string = to_string(temperatura);
 
 
-	dato = "\nHeladera: Marca: " + marca + " Precio: " + precio_string + " Codigo: " + codigo + " Tipo: " + tipo + " Temperatura en grados centigrados: " + temp_string;
+	dato = " Temperatura en grados centigrados: " + temp_string;
 	return dato;
 }
 
-void cHeladera::imprimir() {
+void cHeladera::imprimir()const {
+	cElectrodomesticos::imprimir();
 	string dato = tostring();
 	cout << dato;
 }

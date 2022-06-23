@@ -67,23 +67,36 @@ void ClientePorMinuto(cMusimundo* musimundo)
 {
 	clock_t inicio;
 	int contador = 0;
+	int resta;
 
 	do {
 		inicio = clock();
 
 		do {
 
-			if (clock() - inicio== 60)
+			if (clock() - inicio == 60)
 			{
-				cCliente* cliente = new cCliente();
-				cliente->PedirDatosCliente();
+				resta = clock() / CLOCKS_PER_SEC - inicio / CLOCKS_PER_SEC;
+				if (resta == 60) {
+					cCliente* cliente=NULL;
+					try {
+						cliente = new cCliente();
+					}
+					catch (bad_alloc *e) {// buscar si new lanza bad allcoc dinamico o estatico, dinamico es con *e estatico con &e, el e contiene el tipo de error 
+						cout << "\nOcurrio un error: "<< e->what()<< " Se cerrara esta funcion";
+						delete e;
+						e = NULL;
+						return;
+					}
+				  cliente->PedirDatosCliente();
 
-				cout << "Informacion del cliente:";
-				cout << *cliente;
-				cliente->Comprar(musimundo, 20, 06, 2022);
-			
-				contador++;
-				break;
+				 cout << "Informacion del cliente:";
+				 cout << *cliente;
+				 cliente->Comprar(musimundo, 20, 06, 2022);
+				 delete cliente;// no chequeamos que este en NULL porque ya esta controlado con el try catch anterior
+				 contador++;
+				 break;
+			    }
 			}
 
 	

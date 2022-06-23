@@ -18,8 +18,8 @@ public:
     cHeladera(const cHeladera& heladera);
     bool FuncionamientoIncorrecto();
     void EnchufarHeladera();
-    string tostring();
-    void imprimir();
+    string tostring() const;
+    void imprimir() const;
     //declarar static
     ~cHeladera();
 

@@ -89,13 +89,13 @@ void cCliente::IngresarTarjeta()
 		
 }
 
-//bool operator==(const eMedioPago& mediopago, const eMedioPago& ingresado)
-//{
-//	if (mediopago == ingresado)
-//		return true;
-//
-//	return false;
-//}
+bool cCliente::operator==(const eMedioPago& ingresado)
+{
+	if ( this->mediodepago == ingresado)
+		return true;
+
+	return false;
+}
 
 ostream& operator<<(ostream& out, const cCliente& cliente)
 {

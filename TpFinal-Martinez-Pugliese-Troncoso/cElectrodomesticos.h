@@ -28,8 +28,18 @@ public:
 
 	cElectrodomesticos(string _marca, float _peso, float _precio, string _codigo, string _tipo, float _ancho, float _alto, float _profundidad);// declarar los const
 	virtual bool FuncionamientoIncorrecto()=0;
-	virtual string tostring()=0;
-	virtual void imprimir()=0;
+	// estas funciones no las implementamos en el cpp ya que son virtual
+	virtual string tostring() const {
+		string precio_string = to_string(precio);
+		
+		string dato = "\nMarca: " + marca + " Codigo: " + codigo + " Tipo: " + tipo + " Precio: " + precio_string;
+		return dato;
+	}
+	virtual void imprimir() const {
+
+		string dato = tostring();
+		cout << dato;
+	}
 
 	~cElectrodomesticos();
 	void set_precio(float precio) {
