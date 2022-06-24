@@ -1,29 +1,24 @@
 #include "cPersona.h"
 
 
-cPersona::cPersona() {
-	this->nombrecompleto = " ";
-	this->dni = " ";
+cPersona::cPersona(string nombre, string dni) {
+	this->nombrecompleto = nombre;
+	this->dni = dni;
 }
 
 ostream& operator<<(ostream& out, const cPersona& persona)
 {
-	out << "Nombre y Apellido: " << persona.nombrecompleto << "DNI: " << persona.dni;
+	out << "Nombre y Apellido: " << persona.nombrecompleto << "DNI: " << persona.dni << " MAIL: " << persona.mail;
 	return out;
 }
 istream& operator>>(istream& in, cPersona& persona)
 {
-	cout << "Ingresar Nombre y Apellido: " << endl;
-	string nom;
-	in >> nom;	
-	persona.nombrecompleto = nom;
+	cout << " Ingrese el mail de la persona : "<<persona.nombrecompleto << endl;
+	string mail_;
+	in >> mail_;	
+	persona.mail = mail_;
 	fflush(stdin);
-	cout << "Ingresar DNI: " << endl;
-	string dni_;
-	in >> dni_;
-	persona.dni = dni_;
-	fflush(stdin);
-
+	
 	return in;
 }
 

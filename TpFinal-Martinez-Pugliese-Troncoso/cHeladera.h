@@ -16,6 +16,7 @@ private:
 public:
     cHeladera(int _temperatura, string _marca, float _peso, float _precio, string _codigo, string _tipo, float _ancho, float _alto, float _profundidad);
     cHeladera(const cHeladera& heladera);
+    void operator=(const cHeladera& heladera);
     bool FuncionamientoIncorrecto();
     void EnchufarHeladera();
     string tostring() const;

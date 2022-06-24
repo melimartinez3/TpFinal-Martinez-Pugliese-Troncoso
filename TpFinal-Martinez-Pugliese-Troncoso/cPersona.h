@@ -11,8 +11,9 @@ class cPersona
 private:
 	string nombrecompleto;
 	string dni;
+	string mail;
 public:
-	cPersona();
+	cPersona(string nombre, string dni);
 	virtual ~cPersona() {};
 	string get_nombre() {
 		return this->nombrecompleto;

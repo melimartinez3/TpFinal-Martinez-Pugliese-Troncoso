@@ -1,7 +1,7 @@
 #include "cDespachante.h"
 #include "cMusimundo.h"
 
-cDespachante::cDespachante():cEmpleado()
+cDespachante::cDespachante(string nombre_, string dni_, float sueldo_, char turno_):cEmpleado(sueldo_,turno_)
 {
 
 }

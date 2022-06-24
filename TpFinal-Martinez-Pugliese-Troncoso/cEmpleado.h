@@ -10,9 +10,9 @@ private:
     static int cont_codigo;
     float sueldo;
     char turno; // M mañana T tarde N noche
-    bool atendiendo;
+    bool atendiendo;//si esta en su turno o no
 public:
-    cEmpleado();
+    cEmpleado(string nombre, string dni, float sueldo,char turno);
     void FicharEntrada();
     void FicharSalida();
     virtual~cEmpleado() {};

@@ -1,12 +1,12 @@
 #include "cCliente.h"
 
 
-cCliente::cCliente():cPersona()
+cCliente::cCliente(string nombre_, string dni_, float saldo_, int cant_compras, eMedioPago medio):cPersona(nombre_,dni_)
 {
 	this->mediodepago = efectivo;
 	this->tarjeta = 0;
-	this->saldo = (float)((rand() % 200000) + 20000);
-	this->cantcompras = 0;
+	this->saldo = saldo_;
+	this->cantcompras = cant_compras;
 }
 
 void cCliente::Comprar(cMusimundo* musimundo, int dia, int mes, int anio)
@@ -16,15 +16,15 @@ void cCliente::Comprar(cMusimundo* musimundo, int dia, int mes, int anio)
 	aux= ElegirProducto(musimundo->get_lista_electrodomesticos());
 
 		if (aux != NULL) {
-			if (mediodepago == credito ||mediodepago == debito || mediodepago == mercadopago){
+			if ( mediodepago!=efectivo){
 
 				IngresarTarjeta();
 				try {
 					if (saldo < aux->get_precio())
 						throw;
 				}
-				catch (int& e) {
-					cerr << "No se puede realizar la compra" << endl;
+				catch (exception* e) {
+					cerr << "No se puede realizar la compra : "<<e->what() <<endl;
 					return;
 				}
 		
@@ -68,11 +68,11 @@ cElectrodomesticos* cCliente::ElegirProducto(cLista<cElectrodomesticos>* listael
 void cCliente::IngresarTarjeta()
 {
 	int suma = 0;
-	do {
+	int tarjetaaux;
+
 		cout << "Ingrese su numero de tarjeta" << endl;
 		cin >> tarjeta;
-		int tarjetaaux = tarjeta;// nos creamos un auxiliar para chequear la cantidad de cifras asi no se modifica la variable del objeto
-
+		tarjetaaux = tarjeta;
 		int aux;
 
 		while (tarjetaaux != 0) {
@@ -80,18 +80,37 @@ void cCliente::IngresarTarjeta()
 			tarjetaaux /= 10;
 			suma += aux;
 		}
+
 		if (suma != 16) {
-			cout << "Ingrese nuevamente su nuemro de tarjeta: " << endl;
-			cin >> tarjeta;
-			fflush(stdin);
+			tarjetaaux = 0;
+			do {
+				cout << "Ingrese nuevamente su numero de tarjeta: " << endl;
+				cin >> tarjeta;
+				tarjetaaux = tarjeta;
+				fflush(stdin);
+				while (tarjetaaux != 0) {
+					aux = tarjetaaux % 10;
+					tarjetaaux /= 10;
+					suma += aux;
+				}
+			} while (suma != 16);
 		}
-	} while (suma != 16);
+		this->tarjeta = tarjetaaux;
+//ingresa el numero de tarjeta y calculamos la cantidad de digitos que ingreso, si es diferente de 16 va a entrar a un do while 
+// que va a repetir infinitamente que ingrese su tarjeta hasta que la suma sea igual. Trabajamos con un tarjeta aux, para no ir modificando
 		
 }
 
-bool cCliente::operator==(const eMedioPago& ingresado)
+bool cCliente::operator==(const eMedioPago ingresado)
 {
 	if ( this->mediodepago == ingresado)
+		return true;
+
+	return false;
+}
+bool cCliente::operator!=(const eMedioPago ingresado) {
+
+	if (this->mediodepago != ingresado)
 		return true;
 
 	return false;
@@ -120,35 +139,44 @@ ostream& operator<<(ostream& out, const cCliente& cliente)
 istream& operator>>(istream& in, cCliente& cliente)
 {
 	in >> (cPersona&)cliente;
-	
-	cout << "Ingresar la cantidad de productos a comprar: ";
-	int cant;
-	in >> cant;
-	fflush(stdin);
-	cliente.cantcompras = cant;
-	cout << endl;
-	cout << "Ingresar el medio de pago (E para efectivo, C para credito, D para debito y M para mercadopago): ";
-	char medp;
-	in >> medp;
-	if (medp == 'E' || medp == 'e')
-		cliente.mediodepago = efectivo;
-	if (medp == 'C' || medp == 'c')
-		cliente.mediodepago = credito;
-	if (medp == 'D' || medp == 'd')
-		cliente.mediodepago = debito;
-	if (medp == 'M' || medp == 'm')
-		cliente.mediodepago = mercadopago;
+
+	string tarjeta_;
+	if (cliente.mediodepago == credito || cliente.mediodepago == debito || cliente.mediodepago == mercadopago) {
+
+		cliente.IngresarTarjeta();
+	}
 
 	cout << endl;
 	
 	return in;
 	
 }
-
-void cCliente::PedirDatosCliente()
-{
-	cin >> *this;
+cCliente* cCliente::crear_cliente() {
+	string array_nombres[6] = { "Juan Carlos Fernandez","Pepito Gomez","Monica Perez","Lucho Garcia","Marcos Lopez","Jose Hidalgo" };
+	string array_dni[6] = { "55667788","78945634","78567829","654786132","87612345","907856342" };
+	eMedioPago pago;
+	int rand_nom = rand()%6;
+	int rand_dni = rand() % 6;
+	float saldo = (float)(rand() % 120000) + 20000;
+	int cant = rand() % 3;
+	int medio = rand() % 4;
+	if (medio == 0)
+		pago = efectivo;
+	if (medio == 1)
+		pago = credito;
+	if (medio == 2)
+		pago = debito;
+	if (medio == 3)
+		pago = mercadopago;
+	cCliente* aux = new cCliente(array_nombres[rand_nom], array_dni[rand_dni], saldo, cant,pago);
+	return aux;
 }
+bool cCliente::operator<(const float precio_) {
+	if (this->saldo < precio_)
+		return false;
+	else return true;
+}
+
 
 
 cCliente::~cCliente()

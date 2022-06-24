@@ -1,9 +1,9 @@
 #include "cEmpleado.h"
 
-cEmpleado::cEmpleado() :codigo(cont_codigo++) ,cPersona()
+cEmpleado::cEmpleado(string nombre_, string dni_, float sueldo_, char turno_) :codigo(cont_codigo++) ,cPersona(nombre_,dni_)
 {
-	this->sueldo = 0;
-	this->turno ='T';
+	this->sueldo = sueldo_;
+	this->turno =turno_;
 	this->atendiendo = false;	
 }
 
@@ -29,17 +29,3 @@ ostream& operator<<(ostream& out, const cEmpleado& empleado)
 	return out;
 }
 
-istream& operator>>(istream& in, cEmpleado& empleado)
-{
-	in >> (cPersona&)empleado;
-	cout << "Ingresar sueldo: ";
-	float sueldo_;
-	in >> sueldo_;
-	empleado.sueldo = sueldo_;
-	cout << "Ingresar su turno (M para mañana, T para tarde): ";
-	char turno_;
-	in >> turno_;
-	empleado.turno = turno_;
-	
-	return in;
-}

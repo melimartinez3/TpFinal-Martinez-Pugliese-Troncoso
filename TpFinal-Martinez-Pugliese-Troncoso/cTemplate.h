@@ -26,7 +26,7 @@ public:
 	cLista<T>* Filtrar(string parametro);
 	friend ostream& operator<< <>(ostream& out, const cLista<T>&);
 	T* operator[](int pos);
-
+	bool operator>(int pos);
 	void set_cantactual(int cantactual) {
 		this->cantactual = cantactual;
 	}
@@ -77,13 +77,25 @@ void cLista<T>::operator+(T* nuevo) {
 template <class T>
 T* cLista<T>::operator[](int pos)
 {
-	if (pos < cantactual)
-		return lista[pos];
-
-	else
+	bool ok;
+	try {
+		ok = pos > cantactual;
+	}
+	catch (...) {
 		return NULL;
+	}
+	return lista[pos];
 }
+template <class T>
+bool cLista<T>::operator>(int pos) {
 
+	if (pos > cantactual) {
+		throw new exception(" Se esta intenatndo acceder a una posicion inexistente ");
+		return false;
+	}
+	else return true;
+
+}
 /// <summary>
 /// esta funcion quita de la lista un elemento
 /// </summary>
@@ -161,7 +173,7 @@ ostream& operator<< <>(ostream& out, const cLista<T>& Lista) {
 
 	for (int i = 0; i < Lista.cantactual; i++)
 	{
-		out << Lista.lista[i]->to_string() << endl;
+		out << Lista.lista[i]->tostring() << endl;
 	}
 
 	return out;

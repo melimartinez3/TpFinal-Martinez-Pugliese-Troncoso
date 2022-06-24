@@ -14,8 +14,8 @@ int main() {
 
 	cMusimundo* musimundo = new cMusimundo();
 
-	cVendedor* vendedor1 = new cVendedor();
-	cDespachante* despachante1 = new cDespachante();
+	cVendedor* vendedor1 = new cVendedor("juan perez","44514408",345987,'T');
+	cDespachante* despachante1 = new cDespachante("Juan Carlos", "44894408", 349997, 'M');
 
 	musimundo->get_lista_vendedores()->operator+(vendedor1); //agregamos a los empleados a sus respectivas listas
 	musimundo->get_lista_despachantes()->operator+(despachante1);
@@ -65,6 +65,7 @@ int main() {
 
 void ClientePorMinuto(cMusimundo* musimundo)
 {
+
 	clock_t inicio;
 	int contador = 0;
 	int resta;
@@ -80,7 +81,7 @@ void ClientePorMinuto(cMusimundo* musimundo)
 				if (resta == 60) {
 					cCliente* cliente=NULL;
 					try {
-						cliente = new cCliente();
+						cliente = ;
 					}
 					catch (bad_alloc *e) {// buscar si new lanza bad allcoc dinamico o estatico, dinamico es con *e estatico con &e, el e contiene el tipo de error 
 						cout << "\nOcurrio un error: "<< e->what()<< " Se cerrara esta funcion";

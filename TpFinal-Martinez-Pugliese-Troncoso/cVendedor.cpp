@@ -1,6 +1,6 @@
 #include "cVendedor.h"
 
-cVendedor::cVendedor():cEmpleado()
+cVendedor::cVendedor(string nombre_, string dni_, float sueldo_, char turno_):cEmpleado(sueldo_,turno_)
 {
 	this->vendidos = 0;
 	this->comision = 0;
