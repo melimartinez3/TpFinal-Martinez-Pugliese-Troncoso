@@ -94,8 +94,8 @@ void cMusimundo::VendidosenelDia(int dia, int mes, int anio, cElectrodomesticos*
 	localtime_s(&timeinfo, &rawtime);
 
 	int dia_hoy = timeinfo.tm_mday;
-	int mes_hoy = timeinfo.tm_mon;
-	int anio_hoy = timeinfo.tm_year - 100;
+	int mes_hoy = timeinfo.tm_mon+1;
+	int anio_hoy = timeinfo.tm_year +1900 ;
 
 	cElectrodomesticos* electrodomestico = ProductoAVender(vendido);
 
@@ -396,9 +396,13 @@ void cMusimundo::imprimir() {
 	string dato = tostring();
 	cout << dato;
 	int n = lista_vendidos->get_cant_actual();
-
+	
 	cout << "\nLos electrodomesticos vendidos en el dia fueron: ";
-	cout << lista_vendidos;
+
+	for (int i = 0; i < n; i++)
+	{
+		cout << lista_vendidos->lista[i]->tostring() << endl;
+	}
 
 }
 
@@ -496,7 +500,7 @@ cCliente* cMusimundo::crear_cliente() {
 	int rand_nom = rand() % 6;
 	int rand_dni = rand() % 6;
 	float saldo = (float)(rand() % 120000) + 20000;
-	int cant = rand() % 3;
+	int cant = (rand() % 2)+1;
 	int medio = rand() % 4;
 	if (medio == 0)
 		pago = efectivo;

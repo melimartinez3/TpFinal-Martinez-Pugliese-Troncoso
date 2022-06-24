@@ -38,10 +38,10 @@ bool cHeladera::FuncionamientoIncorrecto()
 
 	try {
 		if (difftime(this->horaenchufado, hora_t) < 600)//la  diferencia entre la hora de enchufado y actual es menor a 10 minutos-> 10*60=600
-			throw;
+			throw new exception(" No es posible realizar el testeo ");
 	}
-	catch (int& e) {
-		cerr << "No han pasado los 10 minutos necesarios de testeo" << e << endl;
+	catch (...) {
+		cerr << "No han pasado los 10 minutos necesarios de testeo" << endl;
 		return false;
 	}
 

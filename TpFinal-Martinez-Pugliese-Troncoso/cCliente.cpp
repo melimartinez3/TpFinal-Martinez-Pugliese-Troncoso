@@ -12,6 +12,7 @@ cCliente::cCliente(string nombre_, string dni_, float saldo_, int cant_compras, 
 void cCliente::Comprar(cMusimundo* musimundo, int dia, int mes, int anio)
 {
 	cElectrodomesticos* aux = NULL;
+	float acum_precios = 0; //acumulador de precios por si el cliente compra mas de un electrodomestico
 	for (int i = 0; i < cantcompras; i++) {
 	aux= ElegirProducto(musimundo->get_lista_electrodomesticos());
 
@@ -35,33 +36,34 @@ void cCliente::Comprar(cMusimundo* musimundo, int dia, int mes, int anio)
 			cout << "El cliente es de libra (como fiona) y no se pudo decidir :/" << endl; //SACAR
 			return;
 		}
+
+		musimundo->Con_o_Sin_Descuento();
+		acum_precios = acum_precios + aux->get_precio(); 
 	}
 
-	float precio = aux->get_precio();
-	float saldo = this->get_saldo();
-	this->set_saldo(saldo - precio);
+	
+	if (saldo > acum_precios)
+		this->set_saldo(saldo - acum_precios);
+	else
+		cout << " El cliente no pudo comprar nada por su saldo insuficiente ";
 
-	musimundo->Con_o_Sin_Descuento();
-	musimundo->VendidosenelDia(dia, mes, anio, aux);
+	try {
+		musimundo->VendidosenelDia(dia, mes, anio, aux);
+	}
+	catch (...) {
+		return;
+	}
 	musimundo->DespacharProducto(aux->get_codigo());
-	cout << "El cliente salio";
 	return;
 }
 
 cElectrodomesticos* cCliente::ElegirProducto(cLista<cElectrodomesticos>* listaelectro)
 {
 	int n=listaelectro->get_cant_actual();
-	for (int i = 0; i < n; i++) {
-		cout << i <<"- "<< listaelectro->lista[i]->tostring() << endl;
-	}
-	int prod;
-	cout << "Elija el producto a comprar: ";
-	cin >> prod;
-	fflush(stdin);
-	if (prod < n)
-		return listaelectro->lista[prod];
-	else
-	return NULL;
+
+	int prod = rand() % (n-1);
+
+	return listaelectro->lista[prod];
 
 }
 

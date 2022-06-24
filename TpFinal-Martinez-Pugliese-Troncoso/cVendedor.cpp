@@ -24,16 +24,16 @@ void cVendedor::AgregarElectrodomesticoVendido(cElectrodomesticos* electrodomest
 
 void cVendedor::EliminarYCrearNuevaLista()
 {
+
 	if (listaelectro != NULL) {
 		for (int i = 0; i < listaelectro->cantactual; i++) {
 			if (listaelectro->lista[i] != NULL) {
-				delete listaelectro->lista[i];
+				listaelectro->lista[i] = NULL;
 			}
 		}
-		delete[] listaelectro;
 	}
 	listaelectro = new cLista<cElectrodomesticos>(TMAX);
-
+	
 }
 
 void cVendedor::BuscarProducto(string codigo, cMusimundo* musimundo)
