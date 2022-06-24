@@ -9,6 +9,14 @@ cCliente::cCliente(string nombre_, string dni_, float saldo_, int cant_compras, 
 	this->cantcompras = cant_compras;
 }
 
+
+/// <summary>
+/// se selecciona el producto a comprar (la cantidad de veces que diga un random)(maximo 3) si se compra con tarjeta se debe introducir el numero de esta. se resta el precio del producto del saldo, se llama a vendidos en el dia para contar una compra y se lo despacha
+/// </summary>
+/// <param name="musimundo"></param>
+/// <param name="dia"></param>
+/// <param name="mes"></param>
+/// <param name="anio"></param>
 void cCliente::Comprar(cMusimundo* musimundo, int dia, int mes, int anio)
 {
 	cElectrodomesticos* aux = NULL;
@@ -59,6 +67,12 @@ void cCliente::Comprar(cMusimundo* musimundo, int dia, int mes, int anio)
 	return;
 }
 
+
+/// <summary>
+/// de forma random se selecciona un producto
+/// </summary>
+/// <param name="listaelectro"></param>
+/// <returns></returns>
 cElectrodomesticos* cCliente::ElegirProducto(cLista<cElectrodomesticos>* listaelectro)
 {
 	int n=listaelectro->get_cant_actual();
@@ -69,6 +83,10 @@ cElectrodomesticos* cCliente::ElegirProducto(cLista<cElectrodomesticos>* listael
 
 }
 
+
+/// <summary>
+/// se pide por consola el numero de tarjeta del usuraio, el cliente no sale de aca sin poner bien los 16 digitos de la tarjeta
+/// </summary>
 void cCliente::IngresarTarjeta()
 {
 	int suma = 0;
@@ -105,6 +123,12 @@ void cCliente::IngresarTarjeta()
 		
 }
 
+
+/// <summary>
+/// compara si los metodos de pago son los mismos
+/// </summary>
+/// <param name="ingresado"></param>
+/// <returns></returns>
 bool cCliente::operator==(const eMedioPago ingresado)
 {
 	if ( this->mediodepago == ingresado)
@@ -112,6 +136,12 @@ bool cCliente::operator==(const eMedioPago ingresado)
 
 	return false;
 }
+
+/// <summary>
+/// compara si los metodos de pago son distintos
+/// </summary>
+/// <param name="ingresado"></param>
+/// <returns></returns>
 bool cCliente::operator!=(const eMedioPago ingresado) {
 
 	if (this->mediodepago != ingresado)
@@ -119,6 +149,7 @@ bool cCliente::operator!=(const eMedioPago ingresado) {
 
 	return false;
 }
+
 
 ostream& operator<<(ostream& out, const cCliente& cliente)
 {
@@ -140,6 +171,7 @@ ostream& operator<<(ostream& out, const cCliente& cliente)
 	return out;
 }
 
+
 istream& operator>>(istream& in, cCliente& cliente)
 {
 	in >> (cPersona&)cliente;
@@ -156,6 +188,11 @@ istream& operator>>(istream& in, cCliente& cliente)
 	
 }
 
+/// <summary>
+/// compara si el saldo es menor al precio del producto
+/// </summary>
+/// <param name="precio_"></param>
+/// <returns></returns>
 bool cCliente::operator<(const float precio_) {
 	if (this->saldo < precio_)
 		return false;

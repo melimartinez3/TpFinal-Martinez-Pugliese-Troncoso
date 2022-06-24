@@ -8,7 +8,7 @@ cPersona::cPersona(string nombre, string dni) {
 
 ostream& operator<<(ostream& out, const cPersona& persona)
 {
-	out << "Nombre y Apellido: " << persona.nombrecompleto << "DNI: " << persona.dni << " MAIL: " << persona.mail;
+	out << "Nombre y Apellido: " << persona.nombrecompleto << " DNI: " << persona.dni + " ";
 	return out;
 }
 istream& operator>>(istream& in, cPersona& persona)

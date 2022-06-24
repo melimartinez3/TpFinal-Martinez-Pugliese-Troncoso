@@ -17,6 +17,7 @@ int main() {
 	cMusimundo* musimundo = new cMusimundo();
 
 	cVendedor* vendedor1 = new cVendedor("juan perez","44514408",345987,'T');
+	vendedor1->FicharEntrada();
 	cDespachante* despachante1 = new cDespachante("Juan Carlos", "44894408", 349997, 'M');
 
 	musimundo->get_lista_vendedores()->operator+(vendedor1); //agregamos a los empleados a sus respectivas listas
@@ -67,6 +68,7 @@ int main() {
 		cliente->Comprar(musimundo, 25, 6, 2022);
 		
 	}
+	vendedor1->FicharSalida();
 	//adentro del bucle
 	musimundo->Determinar_Descuento(); //se fija si es o no el dia 31 del mes para aplicar el descuento
 	musimundo->Termino_Dia_De_Descuentos();
@@ -109,7 +111,7 @@ void PRUEBA(cMusimundo* musimundo) {
 		hora_actual = time(NULL);
 		(void)ctime(&hora_actual);
 		time_t aux = difftime(hora_actual, hora_inicial);
-		if (aux >= 3) {
+		if (aux >= 60) {
 
 			cout << "\nIngreso un cliente"<<endl;
 			cCliente* cliente = NULL;

@@ -2,6 +2,8 @@
 #include "cVendedor.h"
 #include "cDespachante.h"
 #include "cCliente.h"
+
+
 cMusimundo::cMusimundo() :stockminimo(5)
 {
 	this->totalrecaudado = 0;
@@ -17,6 +19,12 @@ cMusimundo::cMusimundo() :stockminimo(5)
 int cMusimundo::vendidos_dia = 0;
 float cMusimundo::totalrecaudado = 0;
 
+
+/// <summary>
+/// Se fija que hija de electrodomestico es y setea el stock a uno menor, le suma su precio al total recaudado y devuelve a el puntero
+/// esta funcion nos sirve para ver el tema stock y el total recaudado, retornamos al puntero por izquierda porque nos parece que deja al codigo mas entendible cuando lo utlizamos en otras funciones
+/// <param name="electrodomestico"></param>
+/// <returns></returns>
 cElectrodomesticos* cMusimundo::ProductoAVender(cElectrodomesticos* electrodomestico)
 {
 	cElectrodomesticos* aux_elect = NULL;
@@ -55,6 +63,13 @@ cElectrodomesticos* cMusimundo::ProductoAVender(cElectrodomesticos* electrodomes
 	return aux_elect;
 }
 
+
+
+
+/// <summary>
+/// con un random elegimos al primer vendedor que se encuentra en la lista que esta atendiendo, esta trabajando.
+/// </summary>
+/// <returns></returns>
 cVendedor* cMusimundo:: EleccionVendedor()
 {
 	int n = lista_vendedores->get_cant_actual();
@@ -79,6 +94,13 @@ cVendedor* cMusimundo:: EleccionVendedor()
 
 }
 
+
+
+
+/// <summary>
+/// le pasamos el codigo del producto a un despacante rnadom que se encuentre en la lista asociada a los despachantes
+/// </summary>
+/// <param name="codigo"></param>
 void cMusimundo::DespacharProducto(string codigo)
 {
 	int n = lista_despachantes->get_cant_actual();
@@ -87,6 +109,15 @@ void cMusimundo::DespacharProducto(string codigo)
 	lista_despachantes->lista[pos]->DespacharProducto(codigo, this);
 }
 
+
+
+/// <summary>
+/// hace las cuentas sobre el cambio de dia, imrpime los datos del dia transcurrido una vez finalizado y resetea a 0 la lista de vendidos y recaudado
+/// </summary>
+/// <param name="_dia"></param>
+/// <param name="_mes"></param>
+/// <param name="_anio"></param>
+/// <param name="vendido"></param>
 void cMusimundo::VendidosenelDia(int _dia, int _mes, int _anio, cElectrodomesticos* vendido) {
 	
 	cVendedor* vendedor = EleccionVendedor();
@@ -125,6 +156,11 @@ void cMusimundo::VendidosenelDia(int _dia, int _mes, int _anio, cElectrodomestic
 	}
 }
 
+
+/// <summary>
+/// verifica que el stock de todos los tipos de electrodomesticos tengan minimo de 5 en stock y retorna la lista de electrodomesticos que no cumple con la condicion
+/// </summary>
+/// <returns></returns>
 cLista<cElectrodomesticos>* cMusimundo::VerificarStockMinimo() {
 
 	cLista<cElectrodomesticos>* aux = new cLista<cElectrodomesticos>(TMAX);
@@ -164,6 +200,12 @@ cLista<cElectrodomesticos>* cMusimundo::VerificarStockMinimo() {
 	return aux;
 }
 
+
+/// <summary>
+/// agrega las heladeras necesarias al stock para llegar a 5
+/// </summary>
+/// <param name="aux"></param>
+/// <param name="cant"></param>
 void cMusimundo::AgregarHeladeras(cLista<cElectrodomesticos>* aux, int cant)
 {
 	switch (cant)
@@ -195,6 +237,11 @@ void cMusimundo::AgregarHeladeras(cLista<cElectrodomesticos>* aux, int cant)
 	}
 }
 
+/// <summary>
+/// agrega los microondas necesarias al stock para llegar a 5
+/// </summary>
+/// <param name="aux"></param>
+/// <param name="cant"></param>
 void cMusimundo::AgregarMicroondas(cLista<cElectrodomesticos>* aux, int cant)
 {
 	switch (cant)
@@ -226,6 +273,12 @@ void cMusimundo::AgregarMicroondas(cLista<cElectrodomesticos>* aux, int cant)
 	}
 }
 
+
+/// <summary>
+/// agrega los televisores necesarias al stock para llegar a 5
+/// </summary>
+/// <param name="aux"></param>
+/// <param name="cant"></param>
 void cMusimundo::AgregarTelevisores(cLista<cElectrodomesticos>* aux, int cant)
 {
 	switch (cant)
@@ -256,6 +309,12 @@ void cMusimundo::AgregarTelevisores(cLista<cElectrodomesticos>* aux, int cant)
 	}
 }
 
+
+
+/// <summary>
+///llamamos a las funciones agregar_electrodomestico y verificar stockminimo, para esencialmente realizar las funciones
+/// </summary>
+/// <returns></returns>
 cLista<cElectrodomesticos>* cMusimundo::CompletarStock() {
 	
 	cLista<cElectrodomesticos>* aux = VerificarStockMinimo();
@@ -327,6 +386,12 @@ cLista<cElectrodomesticos>* cMusimundo::CompletarStock() {
 
 }
 
+
+
+/// <summary>
+/// verificca que la lista de electrodomesticos qeu tienen stock menor a 5(ahora completa) valga mas de 20mil o tenga mas de 15 productos, si es asi, la une con la original. Si no, es eliminada
+/// </summary>
+/// <returns></returns>
 cLista<cElectrodomesticos>* cMusimundo::VerificarCostoListaCompleta() {
 	
 	cLista<cElectrodomesticos>* aux = CompletarStock();
@@ -360,6 +425,10 @@ cLista<cElectrodomesticos>* cMusimundo::VerificarCostoListaCompleta() {
 	return aux;
 }
 
+
+/// <summary>
+/// si cumplio la condicion de verfificarcostolistacompleta los agregamos a la lista asociada a musimundo
+/// </summary>
 void cMusimundo::AgregarListaAlStock() {
 
 	cLista<cElectrodomesticos>* aux = VerificarCostoListaCompleta();
@@ -377,6 +446,8 @@ void cMusimundo::AgregarListaAlStock() {
 	return;
 
 }
+
+
 
 cElectrodomesticos& operator++(cElectrodomesticos& electro) {
 	float precio_anterior = electro.get_precio();
@@ -397,6 +468,9 @@ string cMusimundo::tostring() {
 	return dato;
 }
 
+/// <summary>
+/// imprimimos los datos del dia
+/// </summary>
 void cMusimundo::imprimir() {
 	string dato = tostring();
 	cout << dato;
@@ -411,6 +485,10 @@ void cMusimundo::imprimir() {
 
 }
 
+
+/// <summary>
+/// si es el dia 31 del mes se le aplicara un descuento a la compra
+/// </summary>
 void cMusimundo::Determinar_Descuento() {
 	time_t rawtime;
 	struct tm timeinfo;
@@ -425,6 +503,10 @@ void cMusimundo::Determinar_Descuento() {
 	
 
 }
+
+/// <summary>
+/// se le resta un porcentaje de su precio original al precio del productor (es el descuentpo) y lo seteamos en su atributo
+/// </summary>
 void cMusimundo::Dia_De_Descuentos() {
 
 	int n = lista_electrodomesticos->get_cant_actual();
@@ -434,6 +516,10 @@ void cMusimundo::Dia_De_Descuentos() {
 	}
 
 }
+
+/// <summary>
+/// pasado el 31 los precios vuelven a ser los originales
+/// </summary>
 void cMusimundo::Termino_Dia_De_Descuentos() {
 	int n = lista_electrodomesticos->get_cant_actual();
 
@@ -441,6 +527,10 @@ void cMusimundo::Termino_Dia_De_Descuentos() {
 		operator++(*(lista_electrodomesticos->lista[i]));
 	}
 }
+
+/// <summary>
+/// determina (para usar en otras funciones) si es o no el dia 31 y le avisa al usuario si su compra va a ser con descuento
+/// </summary>
 void cMusimundo::Con_o_Sin_Descuento() {
 	time_t rawtime;
 	struct tm timeinfo;
@@ -450,6 +540,8 @@ void cMusimundo::Con_o_Sin_Descuento() {
 	if (dia_hoy == 31)
 		cout << "\nEsta comprando con descuento! Enhorabuena! ";
 }
+
+
 
 cElectrodomesticos* cMusimundo::BuscarPorCodigo(string _codigo) {
 	cElectrodomesticos* aux = NULL;
@@ -463,6 +555,7 @@ cElectrodomesticos* cMusimundo::BuscarPorCodigo(string _codigo) {
 	return aux;
 
 }
+
 
 cLista<cElectrodomesticos>* cMusimundo::BuscarPorMarca(string _marca) {
 
@@ -498,6 +591,10 @@ cLista<cElectrodomesticos>* cMusimundo::BuscarporTipoyNombre(string _tipo) {
 	return aux;
 }
 
+/// <summary>
+/// creamos de manera automatica a los clientes 
+/// </summary>
+/// <returns></returns>
 cCliente* cMusimundo::crear_cliente() {
 	string array_nombres[6] = { "Juan Carlos Fernandez","Pepito Gomez","Monica Perez","Lucho Garcia","Marcos Lopez","Jose Hidalgo" };
 	string array_dni[6] = { "55667788","78945634","78567829","654786132","87612345","907856342" };
@@ -535,8 +632,6 @@ cMusimundo::~cMusimundo()
 	if (lista_electrodomesticos != NULL)
 		delete lista_electrodomesticos;
 
-	if (lista_vendidos != NULL)
-		delete lista_vendidos;
 
 	if (lista_vendedores != NULL)
 		delete lista_vendedores;

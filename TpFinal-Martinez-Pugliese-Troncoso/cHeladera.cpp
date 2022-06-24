@@ -9,15 +9,29 @@ cHeladera::cHeladera(int _temperatura, string _marca, float _peso, float _precio
 
 int cHeladera::stockactual = 6; //arancamos con 6 para probar el programa. En realidad debería estar en 0
 
+/// <summary>
+///  constructor por copia
+/// </summary>
+/// <param name="heladera"></param>
 cHeladera:: cHeladera(const cHeladera& heladera):cElectrodomesticos(heladera.marca, heladera.peso, heladera.precio, heladera.codigo, heladera.tipo, heladera.dimensiones->get_ancho(), heladera.dimensiones->get_alto(), heladera.dimensiones->get_profundidad())
 {
 	this->operator=(heladera);
 	
 }
+
+/// <summary>
+/// iguala la hora de enchufado y temmperatura de una heladera a otra
+/// </summary>
+/// <param name="heladera"></param>
 void cHeladera::operator=(const cHeladera& heladera) {
 	this->horaenchufado = heladera.horaenchufado;
 	this->temperatura = heladera.temperatura;
 }
+
+
+/// <summary>
+/// saca y guarda la hora de enchufado de la heladera para el testeo
+/// </summary>
 void cHeladera::EnchufarHeladera()
 {
 	time_t hora_t;
@@ -27,6 +41,11 @@ void cHeladera::EnchufarHeladera()
 	this->set_horaenchufado(hora_t);
 }
 
+
+/// <summary>
+/// chequea si el funcionamiento de la heladera es el correcto (de forma random)
+/// </summary>
+/// <returns></returns>
 bool cHeladera::FuncionamientoIncorrecto()
 {
 	int random_error = (rand() % 20) < 4;
@@ -68,6 +87,7 @@ bool cHeladera::FuncionamientoIncorrecto()
 		return false;
 
 }
+
 
 string cHeladera::tostring()const {
 
