@@ -41,7 +41,7 @@ public:
 		cout << dato;
 	}
 
-	~cElectrodomesticos();
+	virtual ~cElectrodomesticos();
 	void set_precio(float precio) {
 		this->precio = precio;
 	}

@@ -25,7 +25,7 @@ void cCliente::Comprar(cMusimundo* musimundo, int dia, int mes, int anio)
 						throw;
 				}
 				catch (exception* e) {
-					cerr << "No se puede realizar la compra : "<<e->what() <<endl;
+					cerr << "\nNo se puede realizar la compra : "<<e->what() <<endl;
 					return;
 				}
 		
@@ -33,7 +33,7 @@ void cCliente::Comprar(cMusimundo* musimundo, int dia, int mes, int anio)
 		}
 		else
 		{
-			cout << "El cliente es de libra (como fiona) y no se pudo decidir :/" << endl; //SACAR
+			cout << "\nEl cliente no continuo con la compra" << endl;
 			return;
 		}
 
@@ -44,8 +44,10 @@ void cCliente::Comprar(cMusimundo* musimundo, int dia, int mes, int anio)
 	
 	if (saldo > acum_precios)
 		this->set_saldo(saldo - acum_precios);
-	else
-		cout << " El cliente no pudo comprar nada por su saldo insuficiente ";
+	else {
+		cout << "\n El cliente no pudo comprar nada por su saldo insuficiente " << endl;
+		return;
+	}
 
 	try {
 		musimundo->VendidosenelDia(dia, mes, anio, aux);
@@ -61,7 +63,7 @@ cElectrodomesticos* cCliente::ElegirProducto(cLista<cElectrodomesticos>* listael
 {
 	int n=listaelectro->get_cant_actual();
 
-	int prod = rand() % (n-1);
+	int prod = rand() % n;
 
 	return listaelectro->lista[prod];
 
@@ -72,7 +74,7 @@ void cCliente::IngresarTarjeta()
 	int suma = 0;
 	int tarjetaaux;
 
-		cout << "Ingrese su numero de tarjeta" << endl;
+		cout << " Ingrese su numero de tarjeta" << endl;
 		cin >> tarjeta;
 		tarjetaaux = tarjeta;
 		int aux;

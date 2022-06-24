@@ -2,6 +2,7 @@
 #include "cMicroondas.h"
 #include  "cTelevisor.h"
 #include "cHeladera.h"
+#include <stdlib.h>
 
 class cVendedor;
 class cDespachante;
@@ -20,6 +21,7 @@ private:
 	cLista<cElectrodomesticos>* lista_vendidos;
 	cLista<cVendedor>* lista_vendedores;
 	cLista<cDespachante>* lista_despachantes;
+	int dia, mes, anio;// es la fecha de la primera compra del dia
 
 public:
 	friend class cDespachante;
@@ -76,6 +78,15 @@ public:
 	cLista<cDespachante>* get_lista_despachantes()
 	{
 		return lista_despachantes;
+	}
+	void set_dia(int _dia) {
+		this->dia = _dia;
+	}
+	void set_mes(int _mes) {
+		this->mes = _mes;
+	}
+	void set_anio(int _anio) {
+		this->anio = _anio;
 	}
 };
 

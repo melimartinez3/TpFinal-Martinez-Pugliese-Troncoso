@@ -1,6 +1,8 @@
 #include "cDespachante.h"
 #include "cCliente.h"
 #include "cVendedor.h"
+#include <time.h>
+
 
 //void ClientePorMinuto(cMusimundo* musimundo);
 void PRUEBA(cMusimundo* musimundo);
@@ -47,67 +49,36 @@ int main() {
 
 	//ClientePorMinuto(musimundo);
 	PRUEBA(musimundo);
+	cout << "\nIngreso un cliente"<< endl;
+	cCliente* cliente = NULL;
+	try {
+		cliente = musimundo->crear_cliente();
+	}
+	catch (bad_alloc *e) {
+		cerr <<" Hubo un error al intentar localizar al cliente: " << e->what();
+		delete e;
+		e = NULL;
+	}
+	if (cliente != NULL)
+	{
+		cout << "Informacion del cliente:"<<endl;
+		cout << *cliente;
 
+		cliente->Comprar(musimundo, 25, 6, 2022);
+		
+	}
 	//adentro del bucle
 	musimundo->Determinar_Descuento(); //se fija si es o no el dia 31 del mes para aplicar el descuento
-	
 	musimundo->Termino_Dia_De_Descuentos();
 
-
-
-	/*if (heladera1 != NULL)
-		delete heladera1;
-	if (microondas1 != NULL)
-		delete microondas1;
-	if (televisor1 != NULL)
-		delete televisor1;
 	if (listaaux != NULL)
-		delete listaaux;*/
-
+		delete listaaux;
+	if (musimundo != NULL)// al tener las listas de electrodomesticos, despachantes y vendedores se encarga de eliminarlos
+		delete musimundo;
+	if (cliente != NULL)
+		delete cliente;
 	return 0;
 }
-
-//void ClientePorMinuto(cMusimundo* musimundo)
-//{
-//
-//	clock_t inicio;
-//	int contador = 0;
-//	int resta;
-//
-//	do {
-//		inicio = clock();
-//
-//		do {
-//
-//			if (clock() - inicio == 10)
-//			{
-//				resta = clock() / CLOCKS_PER_SEC - inicio / CLOCKS_PER_SEC;
-//				if (resta == 10) {
-//
-//					cout << "\nIngreso un cliente";
-//					cCliente* cliente=NULL;
-//					
-//					cliente = musimundo->crear_cliente();
-//
-//					if (cliente == NULL)
-//						break;
-//					
-//				 cout << "Informacion del cliente:";
-//				 cout << *cliente;
-//				 cliente->Comprar(musimundo, 20, 06, 2022);
-//				 delete cliente;// no chequeamos que este en NULL porque ya esta controlado con el try catch anterior
-//				 contador++;
-//
-//				 cout << "\nEl cliente finalizo su compra";
-//
-//				 break;
-//			    }
-//			}	
-//
-//		} while (1);
-//
-//	} while (contador < 3);
-//}
 
 void PRUEBA(cMusimundo* musimundo) {
 
@@ -117,7 +88,7 @@ void PRUEBA(cMusimundo* musimundo) {
 	hora_inicial = time(NULL);
 	(void)ctime(&hora_inicial);
 	
-	cout << "\nIngreso un cliente";
+	cout << "\nIngreso un cliente"<<endl;
 	cCliente* cliente = NULL;
 
 	cliente = musimundo->crear_cliente();
@@ -125,10 +96,10 @@ void PRUEBA(cMusimundo* musimundo) {
 	if (cliente == NULL)
 		return;
 
-	cout << "Informacion del cliente:";
+	cout << " Informacion del cliente:"<< endl;
 	cout << *cliente;
 	
-		cliente->Comprar(musimundo, 20, 06, 2022);
+		cliente->Comprar(musimundo, 24, 6, 2022);
 	
 	delete cliente;// no chequeamos que este en NULL porque ya esta controlado 
 	cont++;
@@ -140,7 +111,7 @@ void PRUEBA(cMusimundo* musimundo) {
 		time_t aux = difftime(hora_actual, hora_inicial);
 		if (aux >= 3) {
 
-			cout << "\nIngreso un cliente";
+			cout << "\nIngreso un cliente"<<endl;
 			cCliente* cliente = NULL;
 
 			cliente = musimundo->crear_cliente();
@@ -148,9 +119,9 @@ void PRUEBA(cMusimundo* musimundo) {
 			if (cliente == NULL)
 				return;
 
-			cout << "Informacion del cliente:";
+			cout << "Informacion del cliente:"<< endl;
 			cout << *cliente;
-			cliente->Comprar(musimundo, 20, 06, 2022);
+			cliente->Comprar(musimundo, 24, 6, 2022);
 			delete cliente;// no chequeamos que este en NULL porque ya esta controlado 
 			cont++;
 

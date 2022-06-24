@@ -9,6 +9,9 @@ cMusimundo::cMusimundo() :stockminimo(5)
 	lista_vendidos = new cLista<cElectrodomesticos>(TMAX);
 	lista_vendedores = new cLista<cVendedor>(TMAX);
 	lista_despachantes = new cLista<cDespachante>(TMAX);
+	this->dia = 24;// asumimos que es la inaguracion de musimundo
+	this->mes = 6;
+	this->anio = 2022;
 }
 
 int cMusimundo::vendidos_dia = 0;
@@ -44,8 +47,8 @@ cElectrodomesticos* cMusimundo::ProductoAVender(cElectrodomesticos* electrodomes
 	}
 	else
 	{
-		throw new exception(" No se encontro en articulo buscado ");
-		return NULL; //PREGUNTAR SI ES NECESARIO
+		throw new exception("\nNo se encontro en articulo buscado ");
+		return NULL; 
 	}
 
 	totalrecaudado = totalrecaudado + aux_elect->get_precio();
@@ -84,31 +87,33 @@ void cMusimundo::DespacharProducto(string codigo)
 	lista_despachantes->lista[pos]->DespacharProducto(codigo, this);
 }
 
-void cMusimundo::VendidosenelDia(int dia, int mes, int anio, cElectrodomesticos* vendido) {
+void cMusimundo::VendidosenelDia(int _dia, int _mes, int _anio, cElectrodomesticos* vendido) {
 	
 	cVendedor* vendedor = EleccionVendedor();
 
-	time_t rawtime;
-	struct tm timeinfo;
-	time(&rawtime);
-	localtime_s(&timeinfo, &rawtime);
-
-	int dia_hoy = timeinfo.tm_mday;
-	int mes_hoy = timeinfo.tm_mon+1;
-	int anio_hoy = timeinfo.tm_year +1900 ;
-
 	cElectrodomesticos* electrodomestico = ProductoAVender(vendido);
 
-	if (dia_hoy == dia && mes_hoy == mes && anio == anio_hoy) {
+	if (this->dia == _dia && this->mes  == _mes && this->anio  == _anio) {
 		vendidos_dia++;// es el dia de hoy, le sumamos uno
 		lista_vendidos->operator+(electrodomestico);
 		vendedor->AgregarElectrodomesticoVendido(electrodomestico);
 
 	}
-	else //PREGUNTAR SI LOS STATICS VAN CON SETTERS O SEPUEDEN HACER ASI
+	else 
 	{ //comenzo un nuevo dia
-		cout << "\nOperaciones del dia de ayer: ";
-		imprimir(); //se imprime el total recaudado y lo vendido en el dia anterior, antes de eliminarlo
+		if (this->dia != 31) {
+			set_dia(dia++);
+		}
+		else if (this->dia == 31 && this->mes!=12) {
+			set_mes(mes++);
+			set_dia(1);
+		}
+		else {
+			set_anio(anio++);
+			set_mes(1);
+			set_dia(1);
+		}
+		imprimir();
 		totalrecaudado = 0;
 		vendidos_dia = 0; //las ventas vuelven a 0
 		totalrecaudado = 0;
@@ -388,7 +393,7 @@ cElectrodomesticos& operator--(cElectrodomesticos& electro) {
 string cMusimundo::tostring() {
 	
 	string recaudado = to_string(totalrecaudado);
-	string dato = "Total Recaudado En el Dia:  " + recaudado;
+	string dato = "\nTotal Recaudado En el Dia:  " + recaudado;
 	return dato;
 }
 
@@ -499,8 +504,8 @@ cCliente* cMusimundo::crear_cliente() {
 	eMedioPago pago;
 	int rand_nom = rand() % 6;
 	int rand_dni = rand() % 6;
-	float saldo = (float)(rand() % 120000) + 20000;
-	int cant = (rand() % 2)+1;
+	float saldo = (float)(rand() % 120000) + 200000;
+	int cant = (rand() % 3)+1;
 	int medio = rand() % 4;
 	if (medio == 0)
 		pago = efectivo;
@@ -510,7 +515,7 @@ cCliente* cMusimundo::crear_cliente() {
 		pago = debito;
 	if (medio == 3)
 		pago = mercadopago;
-	
+	// aca se deberia llamar al cin del padre, pero como nos recomendaron no pedir por consola no lo implementamos
 	cCliente* aux = NULL;
 
 	try {

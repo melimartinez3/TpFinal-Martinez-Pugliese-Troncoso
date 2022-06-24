@@ -4,7 +4,7 @@ cVendedor::cVendedor(string nombre_, string dni_, float sueldo_, char turno_):cE
 {
 	this->vendidos = 0;
 	this->comision = 0;
-	listaelectro = NULL;
+	listaelectro = new cLista<cElectrodomesticos> (TMAX);
 }
 
 void cVendedor::CalcularComision()
