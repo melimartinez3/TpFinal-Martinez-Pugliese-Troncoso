@@ -58,6 +58,9 @@ bool cTelevisor::FuncionamientoIncorrecto() {
 }
 
 string cTelevisor::tostring() {
+
+	string aux = cElectrodomesticos::tostring();
+
 	string dato;
 	string volumen_string, cablee, precio_string;
 	if (cable == true)
@@ -69,7 +72,7 @@ string cTelevisor::tostring() {
 	float precio_ = get_precio();
 	precio_string = to_string(precio_);
 
-	dato = "\nTelevisor: Marca: "+ marca+ " Precio: "+ precio_string+ " Codigo: "+ codigo+ " Tipo: "+ tipo+ " Volumen : " + volumen_string + " Cable conectado : " + cablee;
+	dato = aux +" Televisor: Marca: "+ marca+ " Precio: "+ precio_string+ " Codigo: "+ codigo+ " Tipo: "+ tipo+ " Volumen : " + volumen_string + " Cable conectado : " + cablee;
 	return dato;
 }
 

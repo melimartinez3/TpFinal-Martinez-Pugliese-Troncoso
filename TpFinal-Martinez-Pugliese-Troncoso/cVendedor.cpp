@@ -1,6 +1,6 @@
 #include "cVendedor.h"
 
-cVendedor::cVendedor(string nombre_, string dni_, float sueldo_, char turno_):cEmpleado(sueldo_,turno_)
+cVendedor::cVendedor(string nombre_, string dni_, float sueldo_, char turno_):cEmpleado(nombre_,dni_,sueldo_,turno_)
 {
 	this->vendidos = 0;
 	this->comision = 0;
@@ -36,13 +36,28 @@ void cVendedor::EliminarYCrearNuevaLista()
 
 }
 
-//cLista<cElectrodomesticos>* BuscarProducto(string detalle, cMusimundo* musimundo) {
-//	int n = musimundo->get_lista_electrodomesticos()->get_cant_actual();
-//	cLista<cElectrodomesticos>* aux = musimundo->get_lista_electrodomesticos();
-//	for (int i = 0; i < n; i++) {
-//		if(detalle == aux->)
-//	}
-//}
+void cVendedor::BuscarProducto(string codigo, cMusimundo* musimundo)
+{
+	cElectrodomesticos* electrodomestico = musimundo->BuscarPorCodigo(codigo);
+
+	int n = rand() % 1; //0 es para buscar por marca y 1 para buscar por tipo y nombre
+
+	cLista<cElectrodomesticos>* aux = NULL;
+
+	if (n == 0)
+	{
+		aux = musimundo->BuscarPorMarca(electrodomestico->get_marca());
+		cout << "\nLista de elementos que coinciden con la marca " + electrodomestico->get_marca() << endl;
+		cout << *aux;
+	}
+	else
+	{
+		aux = musimundo->BuscarporTipoyNombre(electrodomestico->get_tipo());
+		cout << "\nLista de elementos que coinciden con el tipo " + electrodomestico->get_tipo() << endl;
+		cout << *aux;
+	}
+}
+
 
 cVendedor::~cVendedor()
 {

@@ -5,6 +5,7 @@
 
 class cVendedor;
 class cDespachante;
+class cCliente;
 
 
 #define TMAX 50
@@ -47,7 +48,8 @@ public:
 	cElectrodomesticos* ProductoAVender(cElectrodomesticos* electrodomestico);
 	cElectrodomesticos* BuscarPorCodigo(string _codigo);
 	cLista<cElectrodomesticos>* BuscarPorMarca(string _marca);
-	cLista<cElectrodomesticos>* BuscarporTipoyNombre(string _tipo, string _nombre);
+	cLista<cElectrodomesticos>* BuscarporTipoyNombre(string _tipo);
+	cCliente* crear_cliente();
 	~cMusimundo();
 
 	void set_totalrecaudado(float nuevorecaudo) {

@@ -13,7 +13,7 @@ public:
     void CalcularComision();
     void AgregarElectrodomesticoVendido(cElectrodomesticos* electrodomestico);
     void EliminarYCrearNuevaLista();
-    cLista<cElectrodomesticos>* BuscarProducto(string detalle, cMusimundo* musimundo);
+    void BuscarProducto(string codigo, cMusimundo* musimundo);
     ~cVendedor();
 
 };

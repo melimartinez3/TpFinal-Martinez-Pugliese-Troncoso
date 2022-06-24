@@ -19,7 +19,6 @@ public:
     void Comprar(cMusimundo* musimundo, int dia, int mes, int anio);
     cElectrodomesticos* ElegirProducto(cLista<cElectrodomesticos>* listaelectro);
     void IngresarTarjeta();
-    cCliente* crear_cliente();
     ~cCliente();
     float get_saldo() {
         return this->saldo;

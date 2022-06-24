@@ -11,7 +11,9 @@ class cDespachante :
 
 public:
 
-	cDespachante(string nombre_, string dni_, float sueldo_, char turno_);
+	cDespachante(string nombre_, string dni_, float sueldo_, char turno_): cEmpleado(nombre_, dni_, sueldo_, turno_)
+	{
+	}
 	bool TestearElectrodomestrico(cElectrodomesticos* electrodomestico);
 	bool DespacharProducto(string codigo, cMusimundo* musimundo);
 	~cDespachante();

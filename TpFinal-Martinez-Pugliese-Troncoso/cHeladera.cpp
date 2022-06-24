@@ -71,16 +71,18 @@ bool cHeladera::FuncionamientoIncorrecto()
 
 string cHeladera::tostring()const {
 
+	string aux = cElectrodomesticos::tostring();
+	
 	string dato,temp_string;
 	temp_string = to_string(temperatura);
 
 
-	dato = " Temperatura en grados centigrados: " + temp_string;
+	dato = aux + " Temperatura en grados centigrados: " + temp_string;
 	return dato;
 }
 
 void cHeladera::imprimir()const {
-	cElectrodomesticos::imprimir();
+
 	string dato = tostring();
 	cout << dato;
 }

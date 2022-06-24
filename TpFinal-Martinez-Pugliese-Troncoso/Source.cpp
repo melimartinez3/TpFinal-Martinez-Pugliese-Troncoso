@@ -43,6 +43,8 @@ int main() {
 		}
 	}
 
+	vendedor1->BuscarProducto("1414025", musimundo);
+
 	ClientePorMinuto(musimundo);
 	//adentro del bucle
 	musimundo->Determinar_Descuento(); //se fija si es o no el dia 31 del mes para aplicar el descuento
@@ -79,28 +81,26 @@ void ClientePorMinuto(cMusimundo* musimundo)
 			{
 				resta = clock() / CLOCKS_PER_SEC - inicio / CLOCKS_PER_SEC;
 				if (resta == 60) {
-					cCliente* cliente=NULL;
-					try {
-						cliente = ;
-					}
-					catch (bad_alloc *e) {// buscar si new lanza bad allcoc dinamico o estatico, dinamico es con *e estatico con &e, el e contiene el tipo de error 
-						cout << "\nOcurrio un error: "<< e->what()<< " Se cerrara esta funcion";
-						delete e;
-						e = NULL;
-						return;
-					}
-				  cliente->PedirDatosCliente();
 
+					cout << "\nIngreso un cliente";
+					cCliente* cliente=NULL;
+					
+					cliente = musimundo->crear_cliente();
+
+					if (cliente == NULL)
+						break;
+					
 				 cout << "Informacion del cliente:";
 				 cout << *cliente;
 				 cliente->Comprar(musimundo, 20, 06, 2022);
 				 delete cliente;// no chequeamos que este en NULL porque ya esta controlado con el try catch anterior
 				 contador++;
+
+				 cout << "\nEl cliente finalizo su compra";
+
 				 break;
 			    }
-			}
-
-	
+			}	
 
 		} while (1);
 

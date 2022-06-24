@@ -1,10 +1,7 @@
 #include "cDespachante.h"
 #include "cMusimundo.h"
 
-cDespachante::cDespachante(string nombre_, string dni_, float sueldo_, char turno_):cEmpleado(sueldo_,turno_)
-{
 
-}
 bool cDespachante::TestearElectrodomestrico(cElectrodomesticos* electrodomestico) {
 	bool control = electrodomestico->FuncionamientoIncorrecto();
 	if (control)

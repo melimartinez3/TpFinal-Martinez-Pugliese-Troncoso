@@ -151,26 +151,7 @@ istream& operator>>(istream& in, cCliente& cliente)
 	return in;
 	
 }
-cCliente* cCliente::crear_cliente() {
-	string array_nombres[6] = { "Juan Carlos Fernandez","Pepito Gomez","Monica Perez","Lucho Garcia","Marcos Lopez","Jose Hidalgo" };
-	string array_dni[6] = { "55667788","78945634","78567829","654786132","87612345","907856342" };
-	eMedioPago pago;
-	int rand_nom = rand()%6;
-	int rand_dni = rand() % 6;
-	float saldo = (float)(rand() % 120000) + 20000;
-	int cant = rand() % 3;
-	int medio = rand() % 4;
-	if (medio == 0)
-		pago = efectivo;
-	if (medio == 1)
-		pago = credito;
-	if (medio == 2)
-		pago = debito;
-	if (medio == 3)
-		pago = mercadopago;
-	cCliente* aux = new cCliente(array_nombres[rand_nom], array_dni[rand_dni], saldo, cant,pago);
-	return aux;
-}
+
 bool cCliente::operator<(const float precio_) {
 	if (this->saldo < precio_)
 		return false;

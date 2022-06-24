@@ -109,6 +109,8 @@ case 2: {
 
 string cMicroondas::tostring() {
 
+	string aux = cElectrodomesticos::tostring();
+
 	string precio_string,dato, potencia_string;
 	
 	float precio_ = get_precio();
@@ -116,7 +118,7 @@ string cMicroondas::tostring() {
 	int potenciaa = get_potenciamaxima();
 	potencia_string = to_string(potenciaa);
 
-	dato = "\nMicroondas: Marca: " + marca + " Precio: " + precio_string + " Codigo: " + codigo + " Tipo: " + tipo + " Potencia: " + potencia_string;
+	dato = aux + " Microondas: Marca: " + marca + " Precio: " + precio_string + " Codigo: " + codigo + " Tipo: " + tipo + " Potencia: " + potencia_string;
 	return dato;
 }
 
